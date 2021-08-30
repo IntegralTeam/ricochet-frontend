@@ -43,8 +43,7 @@ export function* subscriptionRicWbtcUsdcSaga(
   try {
     yield call(approveSubscription, RICAddress, wbtcxUsdcxExchangeAddress);
   } catch (e) {
-    const error = transformError(e);
-    callback(error);
+    callback(transformError(e));
   }
 }
 
@@ -54,8 +53,7 @@ export function* subscriptionRicWethUsdcSaga(
   try {
     yield call(approveSubscription, RICAddress, wethxUsdcxExchangeAddress);
   } catch (e) {
-    const error = transformError(e);
-    callback(error);
+    callback(transformError(e));
   }
 }
 
@@ -65,8 +63,7 @@ export function* subscriptionRicUsdcWbtcSaga(
   try {
     yield call(approveSubscription, RICAddress, usdcxWbtcxExchangeAddress);
   } catch (e) {
-    const error = transformError(e);
-    callback(error);
+    callback(transformError(e));
   }
 }
 
@@ -76,7 +73,6 @@ export function* subscriptionRicUsdcWethSaga(
   try {
     yield call(approveSubscription, RICAddress, usdcxWethxExchangeAddress);
   } catch (e) {
-    const error = transformError(e);
-    callback(error);
+    callback(transformError(e));
   }
 }
