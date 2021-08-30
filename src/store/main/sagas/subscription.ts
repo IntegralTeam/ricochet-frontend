@@ -1,12 +1,21 @@
 import { approveSubscription } from 'api/ethereum';
 import {
   USDCxAddress,
-  usdcxWethxExchangeAddress,
   RICAddress,
   WETHxAddress,
+  wbtcxUsdcxExchangeAddress,
   wethxUsdcxExchangeAddress,
+  usdcxWbtcxExchangeAddress,
+  usdcxWethxExchangeAddress,
 } from 'constants/polygon_config';
 import { call } from 'redux-saga/effects';
+import { transformError } from 'utils/transformError';
+import { 
+  subscriptionRicUsdcWbtc,
+  subscriptionRicUsdcWeth,
+  subscriptionRicWbtcUsdc,
+  subscriptionRicWethUsdc,
+} from '../actionCreators';
 
 export function* subscriptionUsdcSaga() {
   try {
@@ -28,22 +37,46 @@ export function* subscriptionWethSaga() {
   }
 }
 
-export function* subscriptionRicUsdcSaga() {
+export function* subscriptionRicWbtcUsdcSaga(
+  { callback }: ReturnType<typeof subscriptionRicWbtcUsdc>,
+) {
   try {
-    yield call(approveSubscription, RICAddress, usdcxWethxExchangeAddress);
+    yield call(approveSubscription, RICAddress, wbtcxUsdcxExchangeAddress);
   } catch (e) {
-    // TODO: handle errors properly
-    // eslint-disable-next-line no-alert
-    alert("You've already approved RIC for this exchange.");
+    const error = transformError(e);
+    callback(error);
   }
 }
 
-export function* subscriptionRicWethSaga() {
+export function* subscriptionRicWethUsdcSaga(
+  { callback }: ReturnType<typeof subscriptionRicWethUsdc>,
+) {
   try {
     yield call(approveSubscription, RICAddress, wethxUsdcxExchangeAddress);
   } catch (e) {
-    // TODO: handle errors properly
-    // eslint-disable-next-line no-alert
-    alert("You've already approved RIC for this exchange.");
+    const error = transformError(e);
+    callback(error);
+  }
+}
+
+export function* subscriptionRicUsdcWbtcSaga(
+  { callback }: ReturnType<typeof subscriptionRicUsdcWbtc>,
+) {
+  try {
+    yield call(approveSubscription, RICAddress, usdcxWbtcxExchangeAddress);
+  } catch (e) {
+    const error = transformError(e);
+    callback(error);
+  }
+}
+
+export function* subscriptionRicUsdcWethSaga(
+  { callback }: ReturnType<typeof subscriptionRicUsdcWeth>,
+) {
+  try {
+    yield call(approveSubscription, RICAddress, usdcxWethxExchangeAddress);
+  } catch (e) {
+    const error = transformError(e);
+    callback(error);
   }
 }
