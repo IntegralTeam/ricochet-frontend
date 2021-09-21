@@ -113,6 +113,13 @@ export const MainPage: React.FC = () => {
           placeholder={usdcRicFlowQuery?.placeholder}
           isLoading={isLoadingUsdcRicFlow}
         />
+        <MkrDaiFlow
+          balance={balances && balances[MKRxAddress]}
+          totalFlows={mkrDaiFlowQuery?.totalFlows}
+          flowsOwned={mkrDaiFlowQuery?.flowsOwned}
+          placeholder={mkrDaiFlowQuery?.placeholder}
+          isLoading={isLoadingMkrDaiFlow}
+        />
         <UsdcWethFlow
           balance={balances && balances[USDCxAddress]}
           totalFlows={usdcWethFlowQuery?.totalFlows}
