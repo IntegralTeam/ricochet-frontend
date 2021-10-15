@@ -5,7 +5,7 @@ import Link from 'components/common/Link';
 import { FontIcon, FontIconName } from 'components/common/FontIcon';
 import { Routes } from '../../../constants/routes';
 import styles from './styles.module.scss';
-import logo from '../../../../public/ricochet/RicochetLogo.svg';
+import logo from '../../../assets/images/logo.svg';
 
 interface IProps {
   closeMenu?: () => void,

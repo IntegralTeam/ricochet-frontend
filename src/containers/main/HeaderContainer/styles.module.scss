@@ -1,4 +1,5 @@
-@import '../../../../libs/assets/styles/mixins';
+@import '../../../assets/styles/mixins';
+
 
 .header_wrap {
   @include flexbox(center, space-between);
@@ -30,6 +31,8 @@
 }
 
 .links {
+  @include flexbox(center, center);
+  
   margin: 56px 0 56px 0;
 
   @include tablet {

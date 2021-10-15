@@ -1,4 +1,5 @@
-@import '../../../../../libs/assets/styles/mixins';
+@import '../../../assets/styles/mixins';
+
 
 .balance_wrap {
   @include flexbox(flex-start, center);
@@ -9,6 +10,9 @@
 
 .label {
   @include flexbox(center, center);
+
+  background: transparent;
+  border: none;
 
 
   &:active {

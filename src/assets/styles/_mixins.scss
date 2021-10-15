@@ -56,3 +56,9 @@ $defaultFlexBoxJustify: center;
     @content;
   }
 }
+
+@mixin hidden() {
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+}

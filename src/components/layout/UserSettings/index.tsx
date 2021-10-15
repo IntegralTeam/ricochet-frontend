@@ -29,7 +29,8 @@ export const UserSettings: FC<IProps> = ({
       <ButtonUserInfo name={FontIconName.ArrowDown} size={16}>
         <Dropdown
           placement="bottom-start"
-          popupClassName={styles.lang_dropdown} 
+          popupClassName={styles.lang_dropdown}
+          buttonClassName={styles.lang_button} 
           label={<div className={styles.language}>{language}</div>}
         >
           <SelectVariants onSelectLanguage={onSelectLanguage} language={language} />
@@ -37,10 +38,11 @@ export const UserSettings: FC<IProps> = ({
       </ButtonUserInfo>
     </div>
     <div className={styles.dot_wrap}>
-      <button className={styles.button}>
+      <div className={styles.button}>
         <Dropdown
           placement="bottom-end"
-          popupClassName={styles.settings_dropdown} 
+          popupClassName={styles.settings_dropdown}
+          buttonClassName={styles.settings_button} 
           label={<FontIcon className={className} name={FontIconName.Dot} size={16} />}
         >
           <div className={styles.settings_wrap}>
@@ -60,7 +62,7 @@ export const UserSettings: FC<IProps> = ({
             </ul>
           </div>
         </Dropdown>
-      </button>
+      </div>
     </div>
   </div>
 );

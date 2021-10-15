@@ -9,8 +9,8 @@ import Link from 'components/common/Link';
 import { MobileMenu } from 'components/layout/MobileMenu';
 import { useShowSettingsVariants } from 'hooks/useShowSettingsVariants';
 import styles from './styles.module.scss';
-import logo from '../../../public/ricochet/RicochetLogo.svg';
-import menuImg from '../../../public/ricochet/menu.svg';
+import logo from '../../../assets/images/logo.svg';
+import menuImg from '../../../assets/images/menu.svg';
 
 interface IProps {
 

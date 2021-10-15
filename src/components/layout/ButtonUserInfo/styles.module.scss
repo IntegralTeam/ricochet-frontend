@@ -1,4 +1,4 @@
-@import '../../../../../libs/assets/styles/mixins';
+@import "../../../assets/styles/mixins";
 
 .panel {
   @include flexbox(center, center);
@@ -24,6 +24,8 @@
 }
 
 .button {
+  background-color: transparent !important;
+  border: none !important;
 
   &:active,
   &:hover {

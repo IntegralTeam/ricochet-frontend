@@ -29,7 +29,7 @@ const Dropdown: FC<IProps> = ({
     <Manager>
       <Reference>
         {({ ref }) => (
-          <button ref={ref} onFocus={onFocus} onBlur={onBlur} type="button" className={classNames(styles.button, buttonClassName)}>
+          <button ref={ref} onFocus={onFocus} onBlur={onBlur} type="button" className={classNames(styles.buttons, buttonClassName)}>
             {label}
           </button>
         )}

@@ -36,6 +36,7 @@
     "axios": "0.21.1",
     "classnames": "2.2.6",
     "cross-env": "7.0.3",
+    "connected-react-router": "6.8.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-modal": "3.12.1",

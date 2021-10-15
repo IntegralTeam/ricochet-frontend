@@ -3,4 +3,9 @@ $default-font: 'Helvetica Neue', 'Open Sans';
 $default-background: linear-gradient(180deg, #294661 0%, #678EB5 100%);
 $color-input-background: var(--color-white);
 $color-input-text: var(--color-grey);
-$color-input-error: var(--color-error)
+$color-input-error: var(--color-error);
+$color-link: var(--color-primary);
+$transition-time: 0.1s;
+$color-button-primary: var(--color-primary);
+$color-button-secondary: var(--color-secondary);
+$color-button-text: var(--color-white);
