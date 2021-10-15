@@ -8,7 +8,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "tsc": "tsc --noEmit",
-    "lint": "eslint . --ext .ts,.tsx --fix"
+    "lint": "eslint . --ext .ts,.tsx --fix",
+    "fontello": "bash ./fontello.sh",
+    "fontello:open": "fontello-cli --config src/assets/fonts/fontello/config.json open"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -64,6 +66,7 @@
     "eslint-plugin-jsx-a11y": "6.3.1",
     "eslint-plugin-react": "7.20.3",
     "eslint-plugin-react-hooks": "4.2.0",
+    "fontello-cli": "0.6.2",
     "husky": "4.2.5",
     "lint-staged": "10.2.11",
     "node-sass": "5.0.0"
