@@ -1,0 +1,71 @@
+@import '../../../../../libs/assets/styles/mixins';
+
+.buttons_upgrade,
+.downgrade_wrap {
+  @include flexbox(center, center);
+
+  @include tablet {
+    width: 100%;
+    
+  }
+}
+
+.approve_wrap,
+.upgrade_wrap {
+
+  @include tablet {
+    @include flexbox(center, center);
+
+    box-sizing: border-box;
+    border-radius: 8px;
+    width: 100%;
+  }
+
+}
+
+.approve_wrap {
+  margin: 0 10px 0 0;
+
+  @include tablet {
+    border: 1px solid var(--color-blue); 
+  }
+}
+
+.downgrade_wrap {
+
+  @include tablet {
+    @include flexbox(center, center);
+
+    width: 100%;
+
+    box-sizing: border-box;
+    border-radius: 8px;
+  }
+}
+
+
+.approve,
+.upgrade,
+.downgrade {
+  padding: 10px 20px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 140%;
+  width: 100%;
+}
+
+.upgrade {
+  color: var(--color-white);
+  background: var(--color-blue) !important;
+}
+
+.approve {
+  color: var(--color-blue) !important;
+  background: var(--color-white) !important;
+}
+
+.downgrade {
+  color: var(--color-white);
+  background: var(--color-blue) !important;
+}

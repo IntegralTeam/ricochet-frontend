@@ -5,6 +5,7 @@ import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import { ModalType } from 'store/modal/types';
 import { ModalMetamask } from 'containers/modal/ModalMetamask';
 import { ModalNetwork } from 'containers/modal/ModalNetwork';
+import { ModalContainer } from 'containers/main/ModalContainer';
 import styles from './styles.module.scss';
 
 ReactModal.setAppElement('#root');
@@ -15,7 +16,8 @@ export type ModalComponentProps = {
 
 const modalRenderers: Record<ModalType, FC<ModalComponentProps>> = {
   [ModalType.Metamask]: ModalMetamask,
-  [ModalType.Network]: ModalNetwork,  
+  [ModalType.Network]: ModalNetwork,
+  [ModalType.SelectToken]: ModalContainer,  
 };
 
 interface IProps {}

@@ -1,0 +1,43 @@
+import React, {
+  FC,
+} from 'react';
+import Link from 'components/common/Link';
+import { FontIcon, FontIconName } from 'components/common/FontIcon';
+import { Routes } from '../../../constants/routes';
+import styles from './styles.module.scss';
+import logo from '../../../../public/ricochet/RicochetLogo.svg';
+
+interface IProps {
+  closeMenu?: () => void,
+}
+
+export const MobileMenu: FC<IProps> = ({ closeMenu }) => (
+  <div className={styles.menu_mob}>
+    <div className={styles.container}>
+      <div className={styles.menu_head}>
+        <div className={styles.logo}>
+          <Link to={Routes.Invest}><img src={logo} alt="Ricochet" /></Link>
+        </div>
+        <button className={styles.close} onClick={closeMenu} type="button">
+          <FontIcon name={FontIconName.Close} className={styles.close_icon} size={14} />
+        </button>
+      </div>
+      <div className={styles.links}>
+        <Link
+          to={Routes.Invest}
+          className={styles.invest}
+          activeClassName={styles.active}
+        >
+          <div>Invest</div>
+        </Link>
+        <Link
+          to={Routes.Wallet}
+          className={styles.wallet} 
+          activeClassName={styles.active}
+        >
+          <div>Wallet</div>
+        </Link>
+      </div>
+    </div>
+  </div>
+);

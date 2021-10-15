@@ -1,0 +1,30 @@
+@import '../../../../../libs/assets/styles/mixins';
+
+
+.list,
+.lang_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  & li {
+    padding: 0 0 15px 0;
+  }
+
+  & li:last-child {
+    padding: 0;
+  }
+}
+
+.lang {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 110%;
+  color: var(--color-grey);
+  padding: 0 0 5px 0;
+}
+
+.active {
+  font-weight: bold;
+}

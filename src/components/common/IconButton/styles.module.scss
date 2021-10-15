@@ -1,0 +1,13 @@
+@import '../../../assets/styles/mixins';
+
+.panel {
+  width: 32px;
+  height: 32px;
+}
+
+.button {
+
+  &:active{
+    background: transparent;
+  }
+}

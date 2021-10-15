@@ -1,0 +1,124 @@
+@import '../../../../../libs/assets/styles/mixins';
+
+.balance_panel {
+  max-width: 210px;
+
+  @include tablet {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.user_settings {
+  @include flexbox(center, center);
+
+  width: 100%;
+}
+
+.balance {
+  @include flexbox(center, center);
+
+  padding: 8px 0 8px 16px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: -0.01em;
+  font-weight: 700px;
+  white-space: nowrap;
+  margin: 0 10px 0 0;
+}
+.address {
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 17px;
+  letter-spacing: -0.01em;
+  padding: 8px 0 8px 0;
+  margin: 0 7px 0 0;
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.language_wrap {
+  margin: 0 0 0 10px;
+}
+
+.language {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: -0.01em;
+  color: var(--color-white);
+  padding: 7px 14px 9px 10px;
+}
+
+.button {
+  &:hover,
+  &:active {
+    background: transparent;
+  }
+}
+
+
+.list,
+.lang_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  & li:last-child {
+    padding: 0;
+  }
+}
+
+.docs,
+.paper,
+.discord {
+  @include flexbox(flex-start, center);
+
+  flex-direction: column;
+  padding: 0 0 30px 0;
+}
+
+.head {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 110%;
+  color: var(--color-black-dark);
+  padding: 0 0 10px 0;
+  cursor: pointer;
+}
+
+.description,
+.lang {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 110%;
+  color: var(--color-grey);
+}
+
+.lang_wrap {
+  padding: 20px 30px 20px 20px !important;
+}
+
+.lang {
+  cursor: pointer;
+  padding: 0 0 10px 0;
+}
+
+.lang_dropdown,
+.settings_dropdown {
+  font-family: $default-font;
+  background: var(--color-white);
+  border-radius: 20px;
+  padding: 30px 30px 40px 20px;
+  filter: drop-shadow(0px 8px 20px rgba(0, 0, 0, 0.15));
+}
+
+.lang_dropdown {
+  padding: 20px;
+}
