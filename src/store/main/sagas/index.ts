@@ -23,6 +23,7 @@ import {
   wethUsdcStartFlowSaga,
   wbtcUsdcStartFlowSaga,
   usdcWbtcStartFlowSaga,
+  startFlowSaga,
 } from './startFlow';
 import { mainCheckSaga } from './mainCheckSaga';
 import { switchNetworkSaga } from './switchNetworkSaga';
@@ -55,4 +56,5 @@ export default function* mainSaga() {
   yield takeLeading(MainActionTypes.WETH_USDC_START_FLOW, wethUsdcStartFlowSaga);
   yield takeLeading(MainActionTypes.WBTC_USDC_START_FLOW, wbtcUsdcStartFlowSaga);
   yield takeLeading(MainActionTypes.MAIN_SWITCH_NETWORK, switchNetworkSaga);
+  yield takeLeading(MainActionTypes.START_FLOW, startFlowSaga);
 }

@@ -17,6 +17,7 @@ import {
   wbtcUsdcStartFlow,
   usdcWbtcStartFlow,
   mainSetState,
+  startFlowAction,
 } from '../actionCreators';
 
 export function* usdcWethStartFlowSaga({ payload }: ReturnType<typeof usdcWethStartFlow>) {
@@ -116,5 +117,32 @@ export function* wbtcUsdcStartFlowSaga({ payload }: ReturnType<typeof wbtcUsdcSt
     payload.callback(error);
   } finally {
     yield put(mainSetState({ isLoadingWbtcFlow: false }));
+  }
+}
+
+export function* startFlowSaga({ payload }: ReturnType<typeof startFlowAction >) {
+  try {
+    yield put(mainSetState({ isLoadingWbtcFlow: true }));
+    const idaContract: Unwrap<typeof getContract> = yield call(
+      getContract,
+      idaAddress,
+      idaABI,
+    );
+
+    const { config } = payload;
+    const normalizedAmount = Math.round((Number(payload.amount) * 1e18) / 2592000);
+    yield call(startFlow,
+      idaContract,
+      config.superToken,
+      config.tokenA,
+      config.tokenB,
+      normalizedAmount);
+    payload.callback();
+    yield call(sweepQueryFlow);
+  } catch (e) {
+    const error = transformError(e);
+    payload.callback(error);
+  } finally {
+    yield put(mainSetState({ isLoadingWbtcFlow: true }));
   }
 }

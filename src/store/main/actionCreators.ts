@@ -169,3 +169,10 @@ export const subscriptionRicWethUsdc = (callback: (e?: string) => void) => ({
   type: MainActionTypes.SUBSCRIPTION_RIC_WETH_USDC,
   callback,
 });
+
+export const startFlowAction = (payload: string, 
+  config: { [key: string]: string },
+  callback: (e?: string) => void) => ({
+  type: MainActionTypes.START_FLOW,
+  payload: { amount: payload, config, callback },
+});
