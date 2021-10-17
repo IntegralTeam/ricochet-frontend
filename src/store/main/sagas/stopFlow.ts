@@ -12,6 +12,7 @@ import {
   wethUsdcStopFlow,
   wbtcUsdcStopFlow,
   mainSetState,
+  stopFlowAction,
 } from '../actionCreators';
 import { sweepQueryFlow } from './sweepQueryFlow';
 
@@ -61,6 +62,21 @@ export function* wbtcUsdcStopFlowSaga({ payload }: ReturnType<typeof wbtcUsdcSto
   try {
     yield put(mainSetState({ isLoadingWbtcFlow: true }));
     yield call(stopFlow, wbtcxUsdcxExchangeAddress, WBTCxAddress);
+    yield call(sweepQueryFlow);
+    payload.callback();
+  } catch (e) {
+    const error = transformError(e);
+    payload.callback(error);
+  } finally {
+    yield put(mainSetState({ isLoadingWbtcFlow: false }));
+  }
+}
+
+export function* stopFlowSaga({ payload }: ReturnType<typeof stopFlowAction>) {
+  try {
+    yield put(mainSetState({ isLoadingWbtcFlow: true }));
+    const { config } = payload;
+    yield call(stopFlow, config.superToken, config.token);
     yield call(sweepQueryFlow);
     payload.callback();
   } catch (e) {

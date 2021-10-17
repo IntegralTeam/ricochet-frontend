@@ -176,3 +176,11 @@ export const startFlowAction = (payload: string,
   type: MainActionTypes.START_FLOW,
   payload: { amount: payload, config, callback },
 });
+
+export const stopFlowAction = (
+  config: { [key:string]: string },
+  callback: (e?: string) => void,
+) => ({
+  type: MainActionTypes.STOP_FLOW,
+  payload: { callback, config },
+});
