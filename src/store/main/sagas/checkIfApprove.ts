@@ -6,6 +6,8 @@ import { allowance } from 'api/ethereum';
 import { getAddress } from 'utils/getAddress';
 import {
   USDCAddress, USDCxAddress,
+  DAIAddress, DAIxAddress,
+  MKRAddress, MKRxAddress,
   WETHAddress, WETHxAddress,
   WBTCAddress, WBTCxAddress,
 } from 'constants/polygon_config';
@@ -15,7 +17,7 @@ import { selectBalances } from '../selectors';
 export function* checkIfApprove(
   tokenAddress: string,
   superTokenAddress: string,
-  param: 'hasWethApprove' | 'hasUsdcApprove' | 'hasWbtcApprove',
+  param: 'hasWethApprove' | 'hasUsdcApprove' | 'hasWbtcApprove' | 'hasDaiApprove' | 'hasMkrApprove',
 ) {
   const address: Unwrap<typeof getAddress> = yield call(getAddress);
   const contract: Unwrap<typeof getContract> = yield call(
@@ -34,8 +36,16 @@ export function* checkIfApproveWeth() {
   yield call(checkIfApprove, WETHAddress, WETHxAddress, 'hasWethApprove');
 }
 
+export function* checkIfApproveMkr() {
+  yield call(checkIfApprove, MKRAddress, MKRxAddress, 'hasMkrApprove');
+}
+
 export function* checkIfApproveUsdc() {
   yield call(checkIfApprove, USDCAddress, USDCxAddress, 'hasUsdcApprove');
+}
+
+export function* checkIfApproveDai() {
+  yield call(checkIfApprove, DAIAddress, DAIxAddress, 'hasDaiApprove');
 }
 
 export function* checkIfApproveWbtc() {
