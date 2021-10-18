@@ -54,6 +54,11 @@
   font-size: 14px;
   line-height: 140%;
   width: 100%;
+  border: none;
+
+  &:active {
+    border: none;
+  }
 }
 
 .upgrade {

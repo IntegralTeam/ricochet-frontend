@@ -1,12 +1,17 @@
 import { ModalSelectToken } from 'containers/modal/ModalSelectToken';
 import React, {
+  FC,
   ChangeEvent,
   useCallback,
   useState, 
 } from 'react';
 import { useDispatch } from 'react-redux';
 
-export const ModalContainer = () => {
+interface IProps {
+  onCloseModal: () => void
+}
+
+export const ModalContainer: FC<IProps> = ({ onCloseModal }) => {
   const dispatch = useDispatch();
 
   const onSelectCoin = useCallback(() => {
@@ -19,5 +24,12 @@ export const ModalContainer = () => {
     setSearchTerm(e.target.value);
   }, [searchTerm, setSearchTerm]);
 
-  return <ModalSelectToken onSelectCoin={onSelectCoin} value={searchTerm} onChange={onSearch} />;
+  return (
+    <ModalSelectToken
+      onSelectCoin={onSelectCoin}
+      value={searchTerm}
+      onChange={onSearch}
+      onCloseModal={onCloseModal}
+    />
+  );
 };

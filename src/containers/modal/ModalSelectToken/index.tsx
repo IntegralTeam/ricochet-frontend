@@ -11,10 +11,13 @@ import styles from './styles.module.scss';
 interface IProps {
   value: string,
   onSelectCoin: () => void
-  onChange: (e:ChangeEvent<HTMLInputElement>) => void
+  onChange: (e:ChangeEvent<HTMLInputElement>) => void,
+  onCloseModal: () => void
 }
 
-export const ModalSelectToken: FC<IProps> = ({ onSelectCoin, value, onChange }) => {
+export const ModalSelectToken: FC<IProps> = ({
+  onSelectCoin, value, onChange, onCloseModal, 
+}) => {
   let resultsCoin = [...new Array(10).fill(Coin.ETH), ...namesCoin];
   resultsCoin = !value 
     ? resultsCoin 
@@ -29,7 +32,7 @@ export const ModalSelectToken: FC<IProps> = ({ onSelectCoin, value, onChange }) 
               Select a token
             </div>
             <div className={styles.close_wrap}>
-              <button className={styles.close_btn}>
+              <button className={styles.close_btn} onClick={onCloseModal}>
                 <FontIcon name={FontIconName.Close} className={styles.close} size={14} />
               </button>
             </div>
@@ -91,7 +94,7 @@ export const ModalSelectToken: FC<IProps> = ({ onSelectCoin, value, onChange }) 
             : <div className={styles.results}>Results not found</div>}
         </div>
       </div>
-      <div className={styles.backdrop} role="presentation" />
+      <div className={styles.backdrop} onClick={onCloseModal} role="presentation" />
     </>
   );
 };

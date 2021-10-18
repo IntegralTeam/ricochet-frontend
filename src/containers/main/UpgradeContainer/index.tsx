@@ -3,8 +3,11 @@ import { UserSettings } from 'components/layout/UserSettings';
 import { Coin } from 'constants/coins';
 import { useShowSettingsVariants } from 'hooks/useShowSettingsVariants';
 import React, {
-  FC, useCallback, useState,
+  FC,
 } from 'react';
+import { useDispatch } from 'react-redux';
+import { modalShow } from 'store/modal/actionCreators';
+import { ModalType } from 'store/modal/types';
 import styles from './styles.module.scss';
 
 interface IProps {
@@ -16,12 +19,10 @@ export const UpgradeContainer:FC<IProps> = () => {
     selectedLanguage,
     onSelectLanguage, 
   } = useShowSettingsVariants();
-  const [isSelectToken, setIsSelectToken] = useState(false);
-
-  const handleVisionModal = useCallback(() => {  
-    setIsSelectToken(!isSelectToken); 
-  }, 
-  [isSelectToken, setIsSelectToken]);
+  const dispatch = useDispatch();
+  const handleVisionModal = () => {
+    dispatch(modalShow(ModalType.SelectToken));
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -70,14 +71,6 @@ export const UpgradeContainer:FC<IProps> = () => {
           />
         </div>
       </div>
-      {/* {isSelectToken && (
-      <RicochetSelectTokenModal
-        value={searchTerm}
-        onChange={onSearch} 
-        onSelectCoin={() => console.log()} 
-        onClose={handleVisionModal}
-      />
-      )} */}
     </div>
   );
 };

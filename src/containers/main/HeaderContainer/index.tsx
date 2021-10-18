@@ -62,7 +62,7 @@ export const HeaderContainer:FC<IProps> = () => {
           />
         </div>
         <div className={styles.mob_menu}>
-          <IconButton imgName={menuImg} onClick={toggleMenuMobile} />
+          <IconButton className={styles.menu_button} imgName={menuImg} onClick={toggleMenuMobile} />
         </div>
         {isShowMenu && <MobileMenu closeMenu={toggleMenuMobile} />}
       </div>

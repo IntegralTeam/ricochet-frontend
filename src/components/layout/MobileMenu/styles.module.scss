@@ -54,6 +54,7 @@
   line-height: 100%;
   text-align: center;
   color: var(--color-white);
+  text-decoration: none;
   
   &:active,
   &:hover {
@@ -73,6 +74,8 @@
 
 .close {
   margin: 10px 25px 0 0;
+  background: transparent;
+  border: none;
 
   &:hover,
   &:active {

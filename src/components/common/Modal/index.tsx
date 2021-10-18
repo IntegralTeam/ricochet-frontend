@@ -6,6 +6,7 @@ import { ModalType } from 'store/modal/types';
 import { ModalMetamask } from 'containers/modal/ModalMetamask';
 import { ModalNetwork } from 'containers/modal/ModalNetwork';
 import { ModalContainer } from 'containers/main/ModalContainer';
+import cx from 'classnames';
 import styles from './styles.module.scss';
 
 ReactModal.setAppElement('#root');
@@ -43,7 +44,9 @@ export const Modal: FC<IProps> = () => {
   return (
     <ReactModal
       isOpen={active}
-      className={styles.modal}
+      className={cx(styles.modal, {
+        [styles.modal_token]: !!ModalType.SelectToken,
+      })}
       overlayClassName={styles.modal_overlay}
       preventScroll
     >

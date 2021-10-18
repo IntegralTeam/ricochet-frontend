@@ -7,6 +7,7 @@
   width: 100%;
   position: relative;
 
+
   @include tablet {
     @include flexbox(center, center);
 
@@ -54,6 +55,8 @@
   line-height: 110%;
   text-align: center;
   letter-spacing: -0.015em;
+  text-decoration: none;
+  
   &:active,
   &:checked {
     color: var(--color-white) !important;
@@ -110,4 +113,9 @@
 .dot {
   color: var(--color-white-dark);
   margin: 0 0 0 23px;
+}
+
+.menu_button {
+  background: transparent;
+  border: none;
 }

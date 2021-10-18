@@ -40,6 +40,11 @@
   height: 100%;
   position: relative;
   z-index: 2;
+
+  & button {
+    border: none;
+    background: transparent;
+  }
 }
 
 .modal {
@@ -61,7 +66,6 @@
   animation: appear 0.5s forwards;
 
   @include tablet {
-    width: 355px;
     margin: 95px auto;
   }
 }
@@ -88,6 +92,27 @@
 
 .input_wrap {
   padding: 0 0 30px 0;
+}
+
+.container_input {
+  background: var(--color-blue-light);
+  border-radius: 8px;
+}
+
+.input {
+  color: var(--color-blue);
+
+  &::placeholder {
+    color: var(--color-blue);
+
+    &:focus{
+      color:transparent
+    }
+  }
+}
+
+.search {
+  color: var(--color-blue);
 }
 
 .common {
