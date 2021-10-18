@@ -60,7 +60,19 @@ export const WbtcUsdcFlow: React.FC<Props> = ({
   };
 
   return (
-    <Card isLoading={isLoading} main title={<a href="https://polygonscan.com/address/0xD25CBfD04172C8C79c5823bcF14DaB8Fe11C672D" className={styles.link}>{'WBTC >> USDC (market out of commission - do not use. If you have existing streams, please cancel ASAP)'}</a>}>
+    <Card
+      isLoading={isLoading}
+      main
+      title={(
+        <a
+          href="https://docs.ricochet.exchange/docs/network-directory"
+          className={styles.link}
+        >
+          {'WBTC >> USDC'}
+          <span className={styles.badge}>🚰</span>
+        </a>
+      )}
+    >
       <FlowForm
         onSubscription={handleSubscription}
         onStart={handleStart}

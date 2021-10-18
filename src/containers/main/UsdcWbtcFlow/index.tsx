@@ -64,10 +64,11 @@ export const UsdcWbtcFlow: React.FC<Props> = ({
       main
       title={(
         <a
-          href="https://polygonscan.com/address/0x22CD7fa83Ae3381b66e8011930b92564a8E83366"
+          href="https://docs.ricochet.exchange/docs/network-directory"
           className={styles.link}
         >
-          {'USDC >> WBTC (market out of commission - do not use. If you have existing streams, please cancel ASAP)'}
+          {'USDC >> WBTC'}
+          <span className={styles.badge}>🚰</span>
         </a>
       )}
       isLoading={isLoading}
