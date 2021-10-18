@@ -13,7 +13,7 @@ interface IProps {
 
 export const ModalContainer: FC<IProps> = ({ onCloseModal }) => {
   const dispatch = useDispatch();
-
+  
   const onSelectCoin = useCallback(() => {
     dispatch('SELECT_COIN');
   }, [dispatch]);

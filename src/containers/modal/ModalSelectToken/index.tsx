@@ -5,6 +5,7 @@ import React, {
   ChangeEvent,
   FC,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Coin, namesCoin } from '../../../constants/coins';
 import styles from './styles.module.scss';
 
@@ -18,6 +19,7 @@ interface IProps {
 export const ModalSelectToken: FC<IProps> = ({
   onSelectCoin, value, onChange, onCloseModal, 
 }) => {
+  const { t } = useTranslation();
   let resultsCoin = [...new Array(10).fill(Coin.ETH), ...namesCoin];
   resultsCoin = !value 
     ? resultsCoin 
@@ -29,7 +31,7 @@ export const ModalSelectToken: FC<IProps> = ({
         <div className={styles.modal}>
           <div className={styles.select}>
             <div className={styles.select_token_wrap}>
-              Select a token
+              {t('Select a token')}
             </div>
             <div className={styles.close_wrap}>
               <button className={styles.close_btn} onClick={onCloseModal}>
@@ -43,7 +45,7 @@ export const ModalSelectToken: FC<IProps> = ({
               className={styles.input}
               onChange={onChange} 
               containerClassName={styles.container_input} 
-              placeholder="Search name or paste address"
+              placeholder={t('Search name or paste address')}
               left={<FontIcon name={FontIconName.Search} className={styles.search} size={16} />}
             />
           </div>
@@ -76,7 +78,7 @@ export const ModalSelectToken: FC<IProps> = ({
                             {item}
                           </div>
                           <div className={styles.description}>
-                            Ethereum
+                            {t('Ethereum')}
                           </div>
                         </div>
                       </IconButton>
@@ -91,7 +93,7 @@ export const ModalSelectToken: FC<IProps> = ({
                 </div>
               </div>
             )
-            : <div className={styles.results}>Results not found</div>}
+            : <div className={styles.results}>{t('Results not found')}</div>}
         </div>
       </div>
       <div className={styles.backdrop} onClick={onCloseModal} role="presentation" />

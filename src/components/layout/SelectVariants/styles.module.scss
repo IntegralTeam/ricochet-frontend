@@ -4,28 +4,30 @@
 
 .list,
 .lang_list {
-  list-style: none;
+  @include flexbox(center, center);
+
+  flex-direction: column;
   margin: 0;
   padding: 0;
 
-  & li {
-    padding: 0 0 15px 0;
-  }
-
-  & li:last-child {
+  & button:last-child {
     padding: 0;
   }
 }
 
-.lang {
+.row {
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 110%;
   color: var(--color-grey);
-  padding: 0 0 5px 0;
-}
+  padding: 0 0 15px 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 
-.active {
-  font-weight: bold;
+  &:active,
+  &:focus {
+    font-weight: bold;
+  }
 }

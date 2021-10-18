@@ -2,6 +2,7 @@ import React, {
   FC, useCallback, useState,
 } from 'react';
 import { FontIcon, FontIconName } from 'components/common/FontIcon';
+import { useTranslation } from 'react-i18next';
 import styles from './styles.module.scss';
 import { Coin } from '../../../constants/coins';
 import { CoinChange } from '../CoinChange';
@@ -20,6 +21,7 @@ export const PanelChange: FC<IProps> = ({
   value, onChange, onClickStart, onClickStop, placeholder,
 }) => {
   const [inputShow, setInputShow] = useState(false);
+  const { t } = useTranslation();
 
   const toggleInputShow = useCallback(() => { setInputShow(!inputShow); }, 
     [inputShow, setInputShow]);
@@ -27,7 +29,7 @@ export const PanelChange: FC<IProps> = ({
   return (
     <>
       <section className={styles.panel}>
-        <button className={styles.btn_arrow} onClick={toggleInputShow} type="button">
+        <div className={styles.btn_arrow} onClick={toggleInputShow} role="presentation">
           <div className={styles.container}>
             <div className={styles.wrap}>
               <div className={styles.coin}>
@@ -45,7 +47,8 @@ export const PanelChange: FC<IProps> = ({
                   {`${Coin.USDC}/mo.`}
                 </div>
                 <div className={styles.date}>
-                  Runs out on:
+                  {t('Runs out on')}
+                  :
                   <span className={styles.number_date}>11/04/21</span>
                 </div>
               </div>
@@ -81,7 +84,7 @@ export const PanelChange: FC<IProps> = ({
                 )}
             </div>
           </div>
-        </button>
+        </div>
         {inputShow && (
           <div className={styles.form}>
             <CoinRateForm

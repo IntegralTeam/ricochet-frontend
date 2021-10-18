@@ -226,6 +226,8 @@
 }
 
 .close_btn {
+  cursor: pointer;
+  
   &:active {
     background: transparent;
   }

@@ -7,7 +7,7 @@ import { IconButton } from 'components/common/IconButton';
 import { UserSettings } from 'components/layout/UserSettings';
 import Link from 'components/common/Link';
 import { MobileMenu } from 'components/layout/MobileMenu';
-import { useShowSettingsVariants } from 'hooks/useShowSettingsVariants';
+import { useLang } from 'hooks/useLang';
 import styles from './styles.module.scss';
 import logo from '../../../assets/images/logo.svg';
 import menuImg from '../../../assets/images/menu.svg';
@@ -18,13 +18,9 @@ interface IProps {
 
 export const HeaderContainer:FC<IProps> = () => {
   const location = useLocation();
+  const { language, changeLanguage, t } = useLang();
   
   const [isShowMenu, setIsShowMenu] = useState(false);
-
-  const {
-    selectedLanguage,
-    onSelectLanguage, 
-  } = useShowSettingsVariants();
 
   const toggleMenuMobile = useCallback(() => {
     setIsShowMenu(!isShowMenu);
@@ -42,21 +38,21 @@ export const HeaderContainer:FC<IProps> = () => {
             className={styles.dca_link} 
             activeClassName={styles.active}
           >
-            <div>Invest</div>
+            <div>{t('Invest')}</div>
           </Link>
           <Link
             to={Routes.Wallet}
             className={styles.upgrade_link} 
             activeClassName={styles.active}
           >
-            <div>Wallet</div>
+            <div>{t('Wallet')}</div>
           </Link>
         </div>
         <div className={styles.settings_wrap}>
           <UserSettings
             className={styles.dot} 
-            onSelectLanguage={onSelectLanguage}
-            language={selectedLanguage}
+            onSelectLanguage={changeLanguage}
+            language={language}
             balance={5434}
             address="0xA9Ed3b12E28faCb4b04f28a24d3e722DD9b72e40"
           />
@@ -66,7 +62,7 @@ export const HeaderContainer:FC<IProps> = () => {
         </div>
         {isShowMenu && <MobileMenu closeMenu={toggleMenuMobile} />}
       </div>
-      <div className={styles.mob_head}>{location.pathname === Routes.Wallet ? 'Wallet' : 'Invest'}</div>
+      <div className={styles.mob_head}>{location.pathname === Routes.Wallet ? t('Wallet') : t('Invest')}</div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { UpgradePanel } from 'components/layout/UpgradePanel';
 import { UserSettings } from 'components/layout/UserSettings';
 import { Coin } from 'constants/coins';
-import { useShowSettingsVariants } from 'hooks/useShowSettingsVariants';
+import { useLang } from 'hooks/useLang';
 import React, {
   FC,
 } from 'react';
@@ -15,10 +15,8 @@ interface IProps {
 }
 
 export const UpgradeContainer:FC<IProps> = () => {
-  const {
-    selectedLanguage,
-    onSelectLanguage, 
-  } = useShowSettingsVariants();
+  const { language, changeLanguage, t } = useLang();
+
   const dispatch = useDispatch();
   const handleVisionModal = () => {
     dispatch(modalShow(ModalType.SelectToken));
@@ -29,10 +27,10 @@ export const UpgradeContainer:FC<IProps> = () => {
       <div className={styles.container}>
         <div className={styles.upgrade}>
           <div className={styles.header_upgrade}>
-            Upgrade
+            {t('Upgrade')}
           </div>
           <UpgradePanel
-            placeholder="Input Amount" 
+            placeholder={t('Input Amount')}
             balance={1053} 
             nameCoin={Coin.USDC}
             onChange={() => console.log()}
@@ -46,7 +44,7 @@ export const UpgradeContainer:FC<IProps> = () => {
         </div>
         <div className={styles.downgrade}>
           <div className={styles.header_downgrade}>
-            Downgrade
+            {t('Downgrade')}
           </div>
           <UpgradePanel 
             balance={593} 
@@ -55,7 +53,7 @@ export const UpgradeContainer:FC<IProps> = () => {
             onClickApprove={() => console.log()}
             onClickUpgrade={() => console.log()}
             onClickDowngrade={() => console.log()}
-            placeholder="Input Amount" 
+            placeholder={t('Input Amount')} 
             value=""
             isUpgrade={false}
             onSelectToken={handleVisionModal}
@@ -63,8 +61,8 @@ export const UpgradeContainer:FC<IProps> = () => {
         </div>
         <div className={styles.settings_mob}>
           <UserSettings
-            onSelectLanguage={onSelectLanguage}
-            language={selectedLanguage} 
+            onSelectLanguage={changeLanguage}
+            language={language} 
             className={styles.dot}
             balance={5434}
             address="0xA9Ed3b12E28faCb4b04f28a24d3e722DD9b72e40"
