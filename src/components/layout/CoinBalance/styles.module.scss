@@ -11,6 +11,7 @@
 .label {
   @include flexbox(center, center);
 
+  cursor: pointer;
   background: transparent;
   border: none;
 

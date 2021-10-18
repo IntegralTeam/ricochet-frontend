@@ -64,6 +64,12 @@
   }
 }
 
+.settings_wrap {
+  & a{
+    text-decoration: none;
+  }
+}
+
 
 .list,
 .lang_list {
