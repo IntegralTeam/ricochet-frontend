@@ -13,13 +13,14 @@ import logo from '../../../assets/images/logo.svg';
 import menuImg from '../../../assets/images/menu.svg';
 
 interface IProps {
-
+  address: string;
+  balance?: string;
 }
 
-export const HeaderContainer:FC<IProps> = () => {
+export const HeaderContainer:FC<IProps> = ({ address, balance }) => {
   const location = useLocation();
   const { language, changeLanguage, t } = useLang();
-  
+
   const [isShowMenu, setIsShowMenu] = useState(false);
 
   const toggleMenuMobile = useCallback(() => {
@@ -53,8 +54,8 @@ export const HeaderContainer:FC<IProps> = () => {
             className={styles.dot} 
             onSelectLanguage={changeLanguage}
             language={language}
-            balance={5434}
-            address="0xA9Ed3b12E28faCb4b04f28a24d3e722DD9b72e40"
+            ricBalance={balance}
+            account={address}
           />
         </div>
         <div className={styles.mob_menu}>
