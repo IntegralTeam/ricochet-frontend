@@ -1,13 +1,48 @@
-@import '../../../assets/styles/mixins';
-
+@import "../../../assets/styles/mixins";
 
 .balance_panel {
+  @include flexbox(center, center);
+
   max-width: 210px;
+  min-width: 0;
+  height: 33px !important;
+  background: var(--color-blue) !important;
+  border: 1px solid var(--color-blue) !important;
+  border-radius: 10px;
+  color: var(--color-white);
+  font-family: $default-font;
+  font-style: normal;
+  padding: 0;
+  cursor: pointer;
 
   @include tablet {
     width: 100%;
     max-width: 100%;
   }
+}
+
+.icon {
+  @include flexbox(center, center);
+
+  color: var(--color-white);
+  width: 12px;
+  height: 15.75px;
+  padding: 8.25px 19px 9px 0;
+  margin: 0 0 0 auto;
+}
+
+.language_panel {
+  @include flexbox(center, center);
+
+  min-width: 0;
+  height: 33px;
+  background: var(--color-blue) !important;
+  border: 1px solid var(--color-blue) !important;
+  border-radius: 10px;
+  color: var(--color-white) !important;
+  font-family: $default-font;
+  font-style: normal;
+  padding: 0;
 }
 
 .user_settings {
@@ -46,6 +81,8 @@
 }
 
 .language {
+  @include flexbox(center, center);
+
   font-family: $default-font;
   font-style: normal;
   font-weight: normal;
@@ -66,11 +103,10 @@
 }
 
 .settings_wrap {
-  & a{
+  & a {
     text-decoration: none;
   }
 }
-
 
 .list,
 .lang_list {
@@ -133,8 +169,35 @@
   padding: 20px;
 }
 
-.lang_button,
 .settings_button {
   background-color: transparent;
   border: none !important;
+}
+
+.lang_button {
+  @include flexbox(center, center);
+
+  min-width: 0;
+  height: 33px;
+  background: var(--color-blue);
+  border: 1px solid var(--color-blue);
+  border-radius: 10px;
+  color: var(--color-white);
+  font-family: $default-font;
+  font-style: normal;
+  padding: 0;
+  cursor: pointer;
+  transition: 0.3s all;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.lang_icon {
+  padding: 0;
+}
+
+.language_name {
+  padding: 0 15px 0 0;
 }

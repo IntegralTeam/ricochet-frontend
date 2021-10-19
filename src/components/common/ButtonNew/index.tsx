@@ -19,7 +19,7 @@ HTMLButtonElement
   isLoading?: boolean,
 };
 
-export const Button: FC<PropsWithChildren<ButtonProps>> = ({
+export const ButtonNew: FC<PropsWithChildren<ButtonProps>> = ({
   color = 'primary',
   size = 44,
   fullWidth = false,
@@ -55,4 +55,4 @@ export const Button: FC<PropsWithChildren<ButtonProps>> = ({
   </button>
 );
 
-export default Button;
+export default ButtonNew;

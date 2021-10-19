@@ -13,7 +13,7 @@ body {
   // background-image: url('../images/background.png');
   background: $default-background;
   background-size: cover;
-  font-family: "Open Sans";
+  font-family: $default-font;
   width: 100%;
   height: 100%;
   margin: 0;

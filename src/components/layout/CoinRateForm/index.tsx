@@ -2,7 +2,7 @@ import { TextInput } from 'components/common/TextInput';
 import React, {
   FC,
 } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useLang } from 'hooks/useLang';
 import ButtonNew from '../../common/ButtonNew';
 import { Coin } from '../../../constants/coins';
 import styles from './styles.module.scss';
@@ -18,7 +18,7 @@ interface IProps {
 export const CoinRateForm: FC<IProps> = ({
   value, onChange, onClickStart, onClickStop, placeholder,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useLang();
  
   return (
     <div className={styles.input_container}>

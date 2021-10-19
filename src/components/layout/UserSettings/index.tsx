@@ -3,12 +3,11 @@ import React, {
 } from 'react';
 import { FontIcon, FontIconName } from 'components/common/FontIcon';
 import { Dropdown } from 'components/common/Dropdown';
-import { googleLink } from 'constants/urls';
 import { LocaleKey, localeNames } from 'i18n/utils';
 import { useTranslation } from 'react-i18next';
+import ButtonNew from 'components/common/ButtonNew';
 import styles from './styles.module.scss';
-import { ButtonUserInfo } from '../ButtonUserInfo';
-import { SelectVariants } from '../SelectVariants';
+import { SelectLanguage } from '../SelectLanguage';
 
 interface IProps {
   balance: number,
@@ -24,22 +23,29 @@ export const UserSettings: FC<IProps> = ({
   const { t } = useTranslation();
   return (
     <div className={styles.user_settings}>
-      <ButtonUserInfo className={styles.balance_panel} name={FontIconName.RicoUser} size={16}>
+      <ButtonNew className={styles.balance_panel}>
         <div className={styles.balance}>{`${balance} RIC`}</div>
         <div className={styles.address}>{address}</div>
-      </ButtonUserInfo>
+        <FontIcon className={styles.icon} name={FontIconName.RicoUser} size={16} />
+      </ButtonNew>
+
       <div className={styles.language_wrap}>
-        <ButtonUserInfo name={FontIconName.ArrowDown} size={16}>
-          <Dropdown
-            placement="bottom-start"
-            popupClassName={styles.lang_dropdown}
-            buttonClassName={styles.lang_button} 
-            label={<div className={styles.language}>{localeNames[language]}</div>}
-          >
-            <SelectVariants onChange={onSelectLanguage} />
-          </Dropdown>
-        </ButtonUserInfo>
+        <Dropdown
+          placement="bottom-end"
+          popupClassName={styles.lang_dropdown}
+          buttonClassName={styles.lang_button} 
+          label={(
+            <div className={styles.language}>
+              <div className={styles.language_name}>{localeNames[language]}</div>
+              <FontIcon className={styles.lang_icon} name={FontIconName.ArrowDown} size={16} />
+            </div>
+)}
+        >
+          <SelectLanguage onChange={onSelectLanguage} />
+        </Dropdown>
+    
       </div>
+
       <div className={styles.dot_wrap}>
         <div className={styles.button}>
           <Dropdown
@@ -51,15 +57,15 @@ export const UserSettings: FC<IProps> = ({
             <div className={styles.settings_wrap}>
               <ul className={styles.list}>
                 <li className={styles.docs}>
-                  <a className={styles.head} href={googleLink} target="_blank" rel="noreferrer">Docs</a>
+                  <a className={styles.head} href="./RicochetExchangeWhitepaper.pdf" target="_blank" rel="noreferrer">Docs</a>
                   <span className={styles.description}>{t('Documentations for users of Ricochet')}</span>
                 </li>
                 <li className={styles.paper}>
-                  <a className={styles.head} href={googleLink} target="_blank" rel="noreferrer">White Paper</a>
+                  <a className={styles.head} href="https://docs.ricochet.exchange/" target="_blank" rel="noreferrer">White Paper</a>
                   <span className={styles.description}>{t('Check out our fundamential ideas')}</span>
                 </li>
                 <li className={styles.discord}>
-                  <a className={styles.head} href={googleLink} target="_blank" rel="noreferrer">Discord</a>
+                  <a className={styles.head} href="https://discord.gg/mss4t2ED3y" target="_blank" rel="noreferrer">Discord</a>
                   <span className={styles.description}>{t('Join the community on Discord')}</span>
                 </li>
               </ul>

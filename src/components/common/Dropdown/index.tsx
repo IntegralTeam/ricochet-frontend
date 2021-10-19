@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { Manager, Popper, Reference } from 'react-popper';
-import classNames from 'classnames';
+import cx from 'classnames';
 import { Placement } from '@popperjs/core';
 import { usePopperModifiers } from 'hooks/usePopperModifiers';
 import { useFocusEvent } from '../../../hooks/useFocusEvent';
@@ -29,7 +29,7 @@ const Dropdown: FC<IProps> = ({
     <Manager>
       <Reference>
         {({ ref }) => (
-          <button ref={ref} onFocus={onFocus} onBlur={onBlur} type="button" className={classNames(styles.buttons, buttonClassName)}>
+          <button ref={ref} onFocus={onFocus} onBlur={onBlur} type="button" className={cx(styles.buttons, buttonClassName)}>
             {label}
           </button>
         )}
@@ -41,7 +41,7 @@ const Dropdown: FC<IProps> = ({
             <div
               ref={ref}
               style={style}
-              className={classNames(styles.popper, popupClassName, { [styles.hidden]: !focused })}
+              className={cx(styles.popper, popupClassName, { [styles.hidden]: !focused })}
             >
               {children}
             </div>

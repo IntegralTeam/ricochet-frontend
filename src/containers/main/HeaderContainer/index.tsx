@@ -3,11 +3,11 @@ import React, {
 } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Routes } from 'constants/routes';
-import { IconButton } from 'components/common/IconButton';
 import { UserSettings } from 'components/layout/UserSettings';
 import Link from 'components/common/Link';
 import { MobileMenu } from 'components/layout/MobileMenu';
 import { useLang } from 'hooks/useLang';
+import ButtonNew from 'components/common/ButtonNew';
 import styles from './styles.module.scss';
 import logo from '../../../assets/images/logo.svg';
 import menuImg from '../../../assets/images/menu.svg';
@@ -58,7 +58,9 @@ export const HeaderContainer:FC<IProps> = () => {
           />
         </div>
         <div className={styles.mob_menu}>
-          <IconButton className={styles.menu_button} imgName={menuImg} onClick={toggleMenuMobile} />
+          <ButtonNew className={styles.menu_button} onClick={toggleMenuMobile}>
+            <img src={menuImg} alt="" />
+          </ButtonNew>
         </div>
         {isShowMenu && <MobileMenu closeMenu={toggleMenuMobile} />}
       </div>

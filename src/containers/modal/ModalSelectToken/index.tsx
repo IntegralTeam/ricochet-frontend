@@ -1,12 +1,12 @@
+import ButtonNew from 'components/common/ButtonNew';
 import { FontIcon, FontIconName } from 'components/common/FontIcon';
-import { IconButton } from 'components/common/IconButton';
 import { TextInput } from 'components/common/TextInput';
+import { useLang } from 'hooks/useLang';
 import React, {
   ChangeEvent,
   FC,
 } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Coin, namesCoin } from '../../../constants/coins';
+import { Coin, iconsCoin, namesCoin } from '../../../constants/coins';
 import styles from './styles.module.scss';
 
 interface IProps {
@@ -19,8 +19,8 @@ interface IProps {
 export const ModalSelectToken: FC<IProps> = ({
   onSelectCoin, value, onChange, onCloseModal, 
 }) => {
-  const { t } = useTranslation();
-  let resultsCoin = [...new Array(10).fill(Coin.ETH), ...namesCoin];
+  const { t } = useLang();
+  let resultsCoin: Coin[] = [...new Array(10).fill(Coin.ETH), ...namesCoin];
   resultsCoin = !value 
     ? resultsCoin 
     : resultsCoin.filter((coin) => coin.toUpperCase().includes(value.toUpperCase()));
@@ -55,13 +55,13 @@ export const ModalSelectToken: FC<IProps> = ({
           <div className={styles.icon_wrap}>
             {namesCoin.map((name) => (
               <span key={name}>
-                <IconButton
-                  name={name} 
+                <ButtonNew
                   className={styles.icon_button}
                   onClick={onSelectCoin}
                 >
+                  <img src={iconsCoin[name]} alt={name} />
                   <div className={styles.icon_name}>{name}</div>
-                </IconButton>
+                </ButtonNew>
               </span>
             ))}
           </div>
@@ -69,19 +69,20 @@ export const ModalSelectToken: FC<IProps> = ({
             ? (
               <div className={styles.table_wrap}>
                 <div className={styles.table}>
-                  {resultsCoin.map((item) => (
-                    <div key={item} className={styles.row_wrap}>
+                  {resultsCoin.map((name) => (
+                    <div key={name} className={styles.row_wrap}>
               
-                      <IconButton className={styles.coin_wrap} name={item} onClick={onSelectCoin}>
+                      <ButtonNew className={styles.coin_wrap} onClick={onSelectCoin}>
+                        <img src={iconsCoin[name]} alt={name} />
                         <div className={styles.coin_name_wrap}>
                           <div className={styles.coin_name}>
-                            {item}
+                            {name}
                           </div>
                           <div className={styles.description}>
                             {t('Ethereum')}
                           </div>
                         </div>
-                      </IconButton>
+                      </ButtonNew>
 
                       <div className={styles.rate_wrap}>
                         <div className={styles.rate}>

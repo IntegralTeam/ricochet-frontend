@@ -4,6 +4,7 @@
 .button {
   @include flexbox(center, center);
 
+  font-family: $default-font;
   padding: 15px 24px 16px;
   border-radius: 8px;
   font-weight: var(--weight-500);
@@ -11,6 +12,12 @@
   line-height: 21px;
   transition: all $transition-time;
   white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
 
   &:focus {
     outline: none;

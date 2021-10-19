@@ -9,7 +9,7 @@ interface IProps {
   onChange: (value: LocaleKey) => void 
 }
 
-export const SelectVariants: FC<IProps> = ({ onChange }) => (
+export const SelectLanguage: FC<IProps> = ({ onChange }) => (
   <div className={styles.lang_wrap}>
     <div className={styles.lang_list}>
       {

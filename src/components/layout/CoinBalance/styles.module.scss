@@ -6,14 +6,16 @@
 
   flex-direction: column;
   font-family: $default-font;
+  margin: 0 0 0 10px;
 }
 
 .label {
   @include flexbox(center, center);
 
   cursor: pointer;
-  background: transparent;
+  background: transparent !important;
   border: none;
+  padding: 0;
 
 
   &:active {
@@ -22,7 +24,8 @@
 }
 
 .container_balance {
-  margin: 0 0 0 10px;
+  @include flexbox(center, center);
+
 }
 
 .name_wrap {
@@ -34,6 +37,7 @@
   font-weight: bold;
   font-size: 18px;
   line-height: 140%;
+  color: var(--color-black-dark);
 }
         
 .container_arrow {

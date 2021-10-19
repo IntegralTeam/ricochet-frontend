@@ -68,6 +68,12 @@
   @include tablet {
     margin: 95px auto;
   }
+
+  @include for_mobile {
+    max-width: 335px;
+    width: 100%;
+    margin: 95px 10px;
+  }
 }
 
 .select {
@@ -133,6 +139,12 @@
     padding: 15px 20px 0 0;
   }
 
+  @include for_mobile{
+    & > span {
+      padding: 15px 15px 0 0;
+    }
+  }
+
   & span:nth-child(3n) {
     padding: 15px 0 0 0;
   }
@@ -150,7 +162,6 @@
 }
 
 .icon_name {
-  padding: 0 0 0 8px;
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
@@ -171,6 +182,9 @@
 
 .coin_wrap {
   @include flexbox(center, space-between);
+
+  padding: 0 !important;
+  background: transparent !important;
 }
 
 .coin_name_wrap {
@@ -210,7 +224,7 @@
 
 .rate {
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 18px;
   line-height: 140%;
   color: var(--color-blue);
@@ -241,4 +255,10 @@
   color: var(--color-grey);
   text-align: center;
   padding: 20px 0 20px 0;
+}
+
+.icon_button {
+  padding: 0 !important;
+  background: transparent !important;
+
 }
