@@ -6,10 +6,6 @@
   font-family: $default-font;
   padding: 40px 104px 40px 104px;
 
-  & button {
-    border: none;
-    background: transparent;
-  }
 
   @include tablet{
     padding: 40px 30px 30px 30px;

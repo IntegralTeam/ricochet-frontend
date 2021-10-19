@@ -21,14 +21,17 @@
   }
 }
 
+.icon_wrap {
+  padding: 8.25px 19px 9px 0;
+  margin: 0 0 0 auto;
+}
+
 .icon {
   @include flexbox(center, center);
 
   color: var(--color-white);
   width: 12px;
   height: 15.75px;
-  padding: 8.25px 19px 9px 0;
-  margin: 0 0 0 auto;
 }
 
 .language_panel {

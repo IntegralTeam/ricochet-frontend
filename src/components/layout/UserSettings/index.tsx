@@ -6,27 +6,30 @@ import { Dropdown } from 'components/common/Dropdown';
 import { LocaleKey, localeNames } from 'i18n/utils';
 import ButtonNew from 'components/common/ButtonNew';
 import { useLang } from 'hooks/useLang';
+import { trimPad } from 'utils/balances';
 import styles from './styles.module.scss';
 import { SelectLanguage } from '../SelectLanguage';
 
 interface IProps {
-  balance: number,
-  address: string,
+  account: string;
+  ricBalance?: string,
   language: LocaleKey,
   className?: string,
   onSelectLanguage: (value: LocaleKey) => void,
 }
 
 export const UserSettings: FC<IProps> = ({
-  onSelectLanguage, balance, address, language, className,
+  onSelectLanguage, ricBalance = '', account, language, className,
 }) => {
   const { t } = useLang();
   return (
     <div className={styles.user_settings}>
       <ButtonNew className={styles.balance_panel}>
-        <div className={styles.balance}>{`${balance} RIC`}</div>
-        <div className={styles.address}>{address}</div>
-        <FontIcon className={styles.icon} name={FontIconName.RicoUser} size={16} />
+        <div className={styles.balance}>{`${trimPad(ricBalance, 6)} RIC`}</div>
+        <div className={styles.address}>{account.substring(0, 10)}</div>
+        <div className={styles.icon_wrap}>
+          <FontIcon className={styles.icon} name={FontIconName.RicoUser} size={16} />
+        </div>
       </ButtonNew>
 
       <div className={styles.language_wrap}>
