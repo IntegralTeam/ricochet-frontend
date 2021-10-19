@@ -4,6 +4,9 @@ import eth from '../assets/images/coins/ethereum.svg';
 import shib from '../assets/images/coins/shibaInu.svg';
 import usdt from '../assets/images/coins/tetherUsdt.svg';
 import usdc from '../assets/images/coins/usdCoin.svg';
+import dai from '../assets/images/coins/dai.svg';
+import matic from '../assets/images/coins/matic.svg';
+import mkr from '../assets/images/coins/mkr.svg';
 
 export enum Coin {
   WBTC = 'WBTC',
@@ -12,6 +15,9 @@ export enum Coin {
   SHIB = 'SHIB',
   USDT = 'USDT',
   USDC = 'USDC',
+  DAI = 'DAI',
+  MATIC = 'MATIC',
+  MKR = 'MKR',
 }
 
 export const namesCoin = [
@@ -21,6 +27,9 @@ export const namesCoin = [
   Coin.USDT,
   Coin.SHIB,
   Coin.BTC,
+  Coin.DAI,
+  Coin.MATIC,
+  Coin.MKR,
 ];
 
 export const iconsCoin: Record<Coin, string> = {
@@ -30,4 +39,7 @@ export const iconsCoin: Record<Coin, string> = {
   [Coin.USDT]: usdt,
   [Coin.SHIB]: shib,
   [Coin.BTC]: btc,
+  [Coin.DAI]: dai,
+  [Coin.MATIC]: matic,
+  [Coin.MKR]: mkr,
 };
