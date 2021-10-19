@@ -1,51 +1,133 @@
+import { Coin } from './coins';
 import {
   USDCxAddress, 
   usdcxWethxExchangeAddress, 
   WETHxAddress,
+  usdcxRicExchangeAddress,
+  RICAddress,
+  WBTCxAddress,
   usdcxWbtcxExchangeAddress,
   wethxUsdcxExchangeAddress,
-  WBTCxAddress,
   wbtcxUsdcxExchangeAddress,
+  daixMkrxExchangeAddress,
+  DAIxAddress,
+  MKRxAddress,
+  mkrxDaixExchangeAddress,
+  usdcxMkrxExchangeAddress,
+  mkrxUsdcxExchangeAddress,
+  daixEthxExchangeAddress,
+  ethxDaixExchangeAddress,
+  daixMaticxExchangeAddress,
+  MATICxAddress,
+  maticxDaixExchangeAddress,
+  usdcxMaticxExchangeAddress,
+  maticxUsdcxExchangeAddress,
 } from './polygon_config';
 
-export const startFlowConfig = {
+export const flowConfig = {
+  usdc_ric: {
+    superToken: usdcxRicExchangeAddress,
+    tokenA: USDCxAddress,
+    tokenB: RICAddress,
+    coinA: Coin.USDC,
+    coinB: Coin.RIC,
+  },
   usdc_weth: {
     superToken: usdcxWethxExchangeAddress,
     tokenA: USDCxAddress,
     tokenB: WETHxAddress,
+    coinA: Coin.USDC,
+    coinB: Coin.WETH,
   },
   usdc_wbtc: {
     superToken: usdcxWbtcxExchangeAddress,
     tokenA: USDCxAddress,
     tokenB: WBTCxAddress,
+    coinA: Coin.USDC,
+    coinB: Coin.WBTC,
   },
   weth_usdc: {
     superToken: wethxUsdcxExchangeAddress,
     tokenA: WETHxAddress,
     tokenB: USDCxAddress,
+    coinA: Coin.WETH,
+    coinB: Coin.USDC,
   },
   wbtc_usdc: {
     superToken: wbtcxUsdcxExchangeAddress,
     tokenA: WBTCxAddress,
     tokenB: USDCxAddress,
+    coinA: Coin.WBTC,
+    coinB: Coin.USDC,
   },
-};
-
-export const stopFlowConfig = {
-  usdc_weth: {
-    superToken: usdcxWethxExchangeAddress,
-    token: USDCxAddress,
+  dai_mkr: {
+    superToken: daixMkrxExchangeAddress,
+    tokenA: DAIxAddress,
+    tokenB: MKRxAddress,
+    coinA: Coin.DAI,
+    coinB: Coin.MKR,
   },
-  usdc_wbtc: {
-    superToken: usdcxWbtcxExchangeAddress,
-    token: USDCxAddress,
+  mkr_dai: {
+    superToken: mkrxDaixExchangeAddress,
+    tokenA: MKRxAddress,
+    tokenB: DAIxAddress,
+    coinA: Coin.MKR,
+    coinB: Coin.DAI,
   },
-  weth_usdc: {
-    superToken: wethxUsdcxExchangeAddress,
-    token: WETHxAddress,
+  usdc_mkr: {
+    superToken: usdcxMkrxExchangeAddress,
+    tokenA: USDCxAddress,
+    tokenB: MKRxAddress,
+    coinA: Coin.USDC,
+    coinB: Coin.MKR,
   },
-  wbtc_usdc: {
-    superToken: wbtcxUsdcxExchangeAddress,
-    token: WBTCxAddress,
+  mkr_usdc: {
+    superToken: mkrxUsdcxExchangeAddress,
+    tokenA: MKRxAddress,
+    tokenB: USDCxAddress,
+    coinA: Coin.MKR,
+    coinB: Coin.USDC,
+  },
+  dai_eth: {
+    superToken: daixEthxExchangeAddress,
+    tokenA: DAIxAddress,
+    tokenB: WETHxAddress,
+    coinA: Coin.DAI,
+    coinB: Coin.ETH,
+  },
+  eth_dai: {
+    superToken: ethxDaixExchangeAddress,
+    tokenA: WETHxAddress,
+    tokenB: DAIxAddress,
+    coinA: Coin.ETH,
+    coinB: Coin.DAI,
+  },
+  dai_matic: {
+    superToken: daixMaticxExchangeAddress,
+    tokenA: DAIxAddress,
+    tokenB: MATICxAddress,
+    coinA: Coin.DAI,
+    coinB: Coin.MATIC,
+  },
+  matic_dai: {
+    superToken: maticxDaixExchangeAddress,
+    tokenA: MATICxAddress,
+    tokenB: DAIxAddress,
+    coinA: Coin.MATIC,
+    coinB: Coin.DAI,
+  },
+  usdc_matic: {
+    superToken: usdcxMaticxExchangeAddress,
+    tokenA: USDCxAddress,
+    tokenB: MATICxAddress,
+    coinA: Coin.USDC,
+    coinB: Coin.MATIC,
+  },
+  matic_usdc: {
+    superToken: maticxUsdcxExchangeAddress,
+    tokenA: MATICxAddress,
+    tokenB: USDCxAddress,
+    coinA: Coin.MATIC,
+    coinB: Coin.USDC,
   },
 };
