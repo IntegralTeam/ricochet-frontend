@@ -9,10 +9,11 @@ import React, {
 import styles from './styles.module.scss';
 
 interface IProps {
-
+  address: string;
+  balance?: string;
 }
 
-export const InvestContainer :FC<IProps> = () => {
+export const InvestContainer :FC<IProps> = ({ address, balance }) => {
   const { language, changeLanguage, t } = useLang();
 
   return (
@@ -50,8 +51,8 @@ export const InvestContainer :FC<IProps> = () => {
             language={language}
             onSelectLanguage={changeLanguage}
             className={styles.dot}
-            balance={5434}
-            address="0xA9Ed3b12E28faCb4b04f28a24d3e722DD9b72e40"
+            ricBalance={balance}
+            account={address}
           />
         </div>
       </div>

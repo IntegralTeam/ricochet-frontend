@@ -11,10 +11,11 @@ import { ModalType } from 'store/modal/types';
 import styles from './styles.module.scss';
 
 interface IProps {
-
+  address: string;
+  balance?: string;
 }
 
-export const UpgradeContainer:FC<IProps> = () => {
+export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
   const { language, changeLanguage, t } = useLang();
 
   const dispatch = useDispatch();
@@ -64,8 +65,8 @@ export const UpgradeContainer:FC<IProps> = () => {
             onSelectLanguage={changeLanguage}
             language={language} 
             className={styles.dot}
-            balance={5434}
-            address="0xA9Ed3b12E28faCb4b04f28a24d3e722DD9b72e40"
+            ricBalance={balance}
+            account={address}
           />
         </div>
       </div>
