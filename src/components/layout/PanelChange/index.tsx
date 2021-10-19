@@ -2,7 +2,7 @@ import React, {
   FC, useCallback, useState,
 } from 'react';
 import { FontIcon, FontIconName } from 'components/common/FontIcon';
-import { useTranslation } from 'react-i18next';
+import { useLang } from 'hooks/useLang';
 import styles from './styles.module.scss';
 import { Coin } from '../../../constants/coins';
 import { CoinChange } from '../CoinChange';
@@ -21,7 +21,7 @@ export const PanelChange: FC<IProps> = ({
   value, onChange, onClickStart, onClickStop, placeholder,
 }) => {
   const [inputShow, setInputShow] = useState(false);
-  const { t } = useTranslation();
+  const { t } = useLang();
 
   const toggleInputShow = useCallback(() => { setInputShow(!inputShow); }, 
     [inputShow, setInputShow]);

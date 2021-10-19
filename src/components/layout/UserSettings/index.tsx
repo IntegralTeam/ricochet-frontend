@@ -4,8 +4,8 @@ import React, {
 import { FontIcon, FontIconName } from 'components/common/FontIcon';
 import { Dropdown } from 'components/common/Dropdown';
 import { LocaleKey, localeNames } from 'i18n/utils';
-import { useTranslation } from 'react-i18next';
 import ButtonNew from 'components/common/ButtonNew';
+import { useLang } from 'hooks/useLang';
 import styles from './styles.module.scss';
 import { SelectLanguage } from '../SelectLanguage';
 
@@ -20,7 +20,7 @@ interface IProps {
 export const UserSettings: FC<IProps> = ({
   onSelectLanguage, balance, address, language, className,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useLang();
   return (
     <div className={styles.user_settings}>
       <ButtonNew className={styles.balance_panel}>
@@ -57,15 +57,15 @@ export const UserSettings: FC<IProps> = ({
             <div className={styles.settings_wrap}>
               <ul className={styles.list}>
                 <li className={styles.docs}>
-                  <a className={styles.head} href="./RicochetExchangeWhitepaper.pdf" target="_blank" rel="noreferrer">Docs</a>
+                  <a className={styles.head} href="./RicochetExchangeWhitepaper.pdf" target="_blank" rel="noreferrer">{t('Docs')}</a>
                   <span className={styles.description}>{t('Documentations for users of Ricochet')}</span>
                 </li>
                 <li className={styles.paper}>
-                  <a className={styles.head} href="https://docs.ricochet.exchange/" target="_blank" rel="noreferrer">White Paper</a>
+                  <a className={styles.head} href="https://docs.ricochet.exchange/" target="_blank" rel="noreferrer">{t('White Paper')}</a>
                   <span className={styles.description}>{t('Check out our fundamential ideas')}</span>
                 </li>
                 <li className={styles.discord}>
-                  <a className={styles.head} href="https://discord.gg/mss4t2ED3y" target="_blank" rel="noreferrer">Discord</a>
+                  <a className={styles.head} href="https://discord.gg/mss4t2ED3y" target="_blank" rel="noreferrer">{t('Discord')}</a>
                   <span className={styles.description}>{t('Join the community on Discord')}</span>
                 </li>
               </ul>

@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import Link from 'components/common/Link';
 import { FontIcon, FontIconName } from 'components/common/FontIcon';
-import { useTranslation } from 'react-i18next';
+import { useLang } from 'hooks/useLang';
 import { Routes } from '../../../constants/routes';
 import styles from './styles.module.scss';
 import logo from '../../../assets/images/logo.svg';
@@ -13,7 +13,7 @@ interface IProps {
 }
 
 export const MobileMenu: FC<IProps> = ({ closeMenu }) => {
-  const { t } = useTranslation();
+  const { t } = useLang();
   return (
     <div className={styles.menu_mob}>
       <div className={styles.container}>
