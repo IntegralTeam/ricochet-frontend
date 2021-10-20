@@ -375,3 +375,12 @@ export const stopFlowAction = (
   type: MainActionTypes.STOP_FLOW,
   payload: { callback, config },
 });
+
+export const downgradeAction = (
+  value: string,
+  tokenAddress: string,
+  callback: (e?:string) => void,
+) => ({
+  type: MainActionTypes.DOWNGRADE,
+  payload: { tokenAddress, value, callback },
+});

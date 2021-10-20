@@ -58,4 +58,6 @@ export enum MainActionTypes {
 
   START_FLOW = 'MAIN.START_FLOW',
   STOP_FLOW = 'MAIN.STOP_FLOW',
+
+  DOWNGRADE = 'MAIN.DOWNGRADE',
 }
