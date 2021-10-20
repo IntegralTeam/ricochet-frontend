@@ -6,6 +6,7 @@ import ButtonNew from '../../common/ButtonNew';
 
 interface IProps {
   isUpgrade: boolean,
+  isLoading: boolean,
   onClickApprove: () => void,
   onClickUpgrade: () => void,
   onClickDowngrade: () => void,
@@ -13,23 +14,44 @@ interface IProps {
 }
 
 export const UpgradeDowngradeButtons: FC<IProps> = ({
-  isUpgrade, onClickApprove, onClickUpgrade, onClickDowngrade,
+  isUpgrade, isLoading, onClickApprove, onClickUpgrade, onClickDowngrade,
 }) => (
   <div>
     {isUpgrade 
       ? (
         <div className={styles.buttons_upgrade}>
           <div className={styles.approve_wrap}>
-            <ButtonNew onClick={onClickApprove} className={styles.approve}>Approve</ButtonNew>
+            <ButtonNew
+              disabled={isLoading}
+              onClick={onClickApprove}
+              className={styles.approve}
+            >
+              Approve
+
+            </ButtonNew>
           </div>
           <div className={styles.upgrade_wrap}>
-            <ButtonNew onClick={onClickUpgrade} className={styles.upgrade}>Upgrade</ButtonNew>
+            <ButtonNew
+              disabled={isLoading} 
+              onClick={onClickUpgrade}
+              className={styles.upgrade}
+            >
+              Upgrade
+
+            </ButtonNew>
           </div>
         </div>
       )
       : (
         <div className={styles.downgrade_wrap}>
-          <ButtonNew onClick={onClickDowngrade} className={styles.downgrade}>Downgrade</ButtonNew>
+          <ButtonNew
+            disabled={isLoading} 
+            onClick={onClickDowngrade}
+            className={styles.downgrade}
+          >
+            Downgrade
+
+          </ButtonNew>
         </div>
       )}
   </div>

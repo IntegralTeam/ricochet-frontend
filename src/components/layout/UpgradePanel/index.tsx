@@ -12,6 +12,7 @@ interface IProps {
   value: string,
   placeholder?: string,
   isUpgrade: boolean,
+  isLoading: boolean,
   nameCoin: Coin,
   onChange: () => void,
   onClickApprove: () => void,
@@ -22,7 +23,8 @@ interface IProps {
 
 export const UpgradePanel: FC<IProps> = ({
   balance, nameCoin, placeholder,
-  onChange, onClickApprove, onClickUpgrade, onClickDowngrade, value, isUpgrade, onSelectToken, 
+  onChange, onClickApprove, onClickUpgrade, onClickDowngrade, value, isUpgrade, isLoading,
+  onSelectToken, 
 }) => (
   <section className={styles.panel_mob}>
     <section className={styles.panel}>
@@ -51,6 +53,7 @@ export const UpgradePanel: FC<IProps> = ({
             onClickUpgrade={onClickUpgrade}
             onClickDowngrade={onClickDowngrade}
             isUpgrade={isUpgrade}
+            isLoading={isLoading}
           />
         </div>
       </div>
@@ -61,6 +64,7 @@ export const UpgradePanel: FC<IProps> = ({
         onClickUpgrade={onClickUpgrade}
         onClickDowngrade={onClickDowngrade}
         isUpgrade={isUpgrade}
+        isLoading={isLoading}
       />
     </div>
   </section>

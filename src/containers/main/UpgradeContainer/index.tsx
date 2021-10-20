@@ -40,6 +40,7 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
             onClickDowngrade={() => console.log()}
             value=""
             isUpgrade
+            isLoading
             onSelectToken={handleVisionModal}
           />
         </div>
@@ -57,6 +58,7 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
             placeholder={t('Input Amount')} 
             value=""
             isUpgrade={false}
+            isLoading={false}
             onSelectToken={handleVisionModal}
           />
         </div>
