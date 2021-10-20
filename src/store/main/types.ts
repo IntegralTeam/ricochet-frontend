@@ -123,5 +123,6 @@ export type MainState = {
   isLoadingWethFlow: boolean,
   
   isLoadingDowngrade: boolean,
+  isLoadingUpgrade: boolean,
   isLoading: boolean,
 };

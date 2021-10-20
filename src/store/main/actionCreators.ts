@@ -384,3 +384,25 @@ export const downgradeAction = (
   type: MainActionTypes.DOWNGRADE,
   payload: { tokenAddress, value, callback },
 });
+
+export const approveAction = ( 
+  amount: string,
+  tokenAddress: string,
+  superTokenAddress: string,
+  callback: (e?:string) => void,
+  multi?: number,
+) => ({
+  type: MainActionTypes.APPROVE,
+  payload: {
+    value: amount, tokenAddress, superTokenAddress, multi, callback, 
+  },
+});
+
+export const upgradeAction = (
+  amount: string,
+  superTokenAddress: string,
+  callback: (e?:string) => void,
+) => ({
+  type: MainActionTypes.UPGRADE,
+  payload: { value: amount, superTokenAddress, callback },
+});

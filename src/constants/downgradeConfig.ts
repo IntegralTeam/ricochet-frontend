@@ -1,3 +1,4 @@
+import { Coin } from './coins';
 import {
   USDCxAddress, 
   WETHxAddress,
@@ -8,23 +9,23 @@ import {
 
 export const downgradeTokensList = [
   {
-    coin: 'USDCx',
+    coin: Coin.USDCx,
     tokenAddress: USDCxAddress,
   },
   {
-    coin: 'DAIx',
+    coin: Coin.DAIx,
     tokenAddress: DAIxAddress,
   },
   {
-    coin: 'MKRx',
+    coin: Coin.MKRx,
     tokenAddress: MKRxAddress,
   },
   {
-    coin: 'WETHx',
+    coin: Coin.WETHx,
     tokenAddress: WETHxAddress,
   },
   {
-    coin: 'WBTCx',
+    coin: Coin.WBTCx,
     tokenAddress: WBTCxAddress,
   },
 ];

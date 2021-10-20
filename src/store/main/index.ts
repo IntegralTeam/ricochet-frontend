@@ -30,6 +30,7 @@ export const mainInitialState: Readonly<MainState> = {
   isLoadingWethUpgrade: false,
   isLoadingWethFlow: false,
   isLoadingDowngrade: false,
+  isLoadingUpgrade: false,
   isLoading: true,
 };
 

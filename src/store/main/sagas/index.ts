@@ -15,6 +15,7 @@ import {
   approveUsdcSaga,
   approveWethSaga,
   approveWbtcSaga,
+  approveMainSaga,
 } from './approveSaga';
 import {
   upgradeMkrSaga,
@@ -22,6 +23,7 @@ import {
   upgradeUsdcSaga,
   upgradeWethSaga,
   upgradeWbtcSaga,
+  upgradeMainSaga,
 } from './upgradeSaga';
 import {
   subscriptionUsdcSaga, subscriptionWethSaga,
@@ -121,4 +123,6 @@ export default function* mainSaga() {
   yield takeLeading(MainActionTypes.START_FLOW, startFlowSaga);
   yield takeLeading(MainActionTypes.STOP_FLOW, stopFlowSaga);
   yield takeLeading(MainActionTypes.DOWNGRADE, downgradeMainSaga);
+  yield takeLeading(MainActionTypes.APPROVE, approveMainSaga);
+  yield takeLeading(MainActionTypes.UPGRADE, upgradeMainSaga);
 }
