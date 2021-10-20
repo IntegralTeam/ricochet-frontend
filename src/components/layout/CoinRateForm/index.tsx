@@ -1,5 +1,6 @@
 import { TextInput } from 'components/common/TextInput';
 import React, {
+  ChangeEvent,
   FC,
 } from 'react';
 import { useLang } from 'hooks/useLang';
@@ -10,13 +11,15 @@ import styles from './styles.module.scss';
 interface IProps {
   value: string,
   placeholder?: string,
-  onChange: () => void,
+  onChange: (e:ChangeEvent<HTMLInputElement>) => void,
   onClickStart: () => void,
   onClickStop: () => void,
+  coin: Coin;
+  isLoading?: boolean;
 }
 
 export const CoinRateForm: FC<IProps> = ({
-  value, onChange, onClickStart, onClickStop, placeholder,
+  value, onChange, onClickStart, onClickStop, placeholder, coin, isLoading,
 }) => {
   const { t } = useLang();
  
@@ -29,19 +32,20 @@ export const CoinRateForm: FC<IProps> = ({
           onChange={onChange} 
           containerClassName={styles.container_input} 
           placeholder={placeholder}
-          right={<div className={styles.right}>{`${Coin.USDC}x/mo.`}</div>}
+          right={<div className={styles.right}>{`${coin}x/mo.`}</div>}
+          type="number"
         />
       </div>
       <div className={styles.buttons}>
         <div className={styles.start_wrap}>
-          <ButtonNew onClick={onClickStart} className={styles.start}>
+          <ButtonNew onClick={onClickStart} className={styles.start} disabled={isLoading}>
             {t('Start')}
             /
             {t('Edit')}
           </ButtonNew>
         </div>
         <div className={styles.stop_wrap}>
-          <ButtonNew onClick={onClickStop} className={styles.stop}>{t('Stop')}</ButtonNew>
+          <ButtonNew onClick={onClickStop} className={styles.stop} disabled={isLoading}>{t('Stop')}</ButtonNew>
         </div>
       </div>
     </div>
