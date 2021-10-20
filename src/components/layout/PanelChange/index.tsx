@@ -1,8 +1,10 @@
 import React, {
-  FC, useCallback, useState,
+  ChangeEvent,
+  FC, useCallback, useEffect, useState,
 } from 'react';
 import { FontIcon, FontIconName } from 'components/common/FontIcon';
 import { useLang } from 'hooks/useLang';
+import { showErrorToast } from 'components/common/Toaster';
 import styles from './styles.module.scss';
 import { Coin } from '../../../constants/coins';
 import { CoinChange } from '../CoinChange';
@@ -10,22 +12,66 @@ import { CoinBalancePanel } from '../CoinBalancePanel';
 import { CoinRateForm } from '../CoinRateForm';
 
 interface IProps {
-  value: string,
   placeholder?:string,
-  onChange: () => void,
-  onClickStart: () => void,
-  onClickStop: () => void
+  onClickStart: (amount: string, callback: (e?: string) => void) => void,
+  onClickStop: (callback: (e?: string) => void) => void
+  coinA: Coin,
+  coinB: Coin,
+  balanceA?: string;
+  balanceB?: string;
+  totalFlow?: string;
+  personalFlow?: string;
+  mainLoading?: boolean;
 }
 
 export const PanelChange: FC<IProps> = ({
-  value, onChange, onClickStart, onClickStop, placeholder,
+  onClickStart,
+  onClickStop,
+  placeholder,
+  coinA,
+  coinB, 
+  balanceA,
+  balanceB,
+  totalFlow, 
+  personalFlow,
+  mainLoading = false,
 }) => {
   const [inputShow, setInputShow] = useState(false);
+  const [value, setValue] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
   const { t } = useLang();
+
+  useEffect(() => {
+    setIsLoading(mainLoading);
+  }, [mainLoading]);
 
   const toggleInputShow = useCallback(() => { setInputShow(!inputShow); }, 
     [inputShow, setInputShow]);
   
+  const handleChange = useCallback((e:ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  }, []);
+
+  const callback = (e?: string) => {
+    if (e) {
+      showErrorToast(e, 'Error');
+    }
+    setIsLoading(false);
+  };
+
+  const handleStart = useCallback(() => {
+    if (!!balanceA || Number(value) < 0) {
+      return;
+    }
+    setIsLoading(true);
+    onClickStart(value, callback);
+  }, [value]);
+
+  const handleStop = useCallback(() => {
+    setIsLoading(true);
+    onClickStop(callback);
+  }, [callback]);
+
   return (
     <>
       <section className={styles.panel}>
@@ -33,18 +79,16 @@ export const PanelChange: FC<IProps> = ({
           <div className={styles.container}>
             <div className={styles.wrap}>
               <div className={styles.coin}>
-                <CoinChange nameCoinLeft={Coin.USDC} nameCoinRight={Coin.WBTC} />
+                <CoinChange nameCoinLeft={coinA} nameCoinRight={coinB} />
               </div>
-
               <div className={styles.streaming_mob}>
-                <span className={styles.number}>78,382.45</span>
-                {`${Coin.USDC}x/mo.`}
+                <span className={styles.number}>{totalFlow}</span>
+                {`${coinA}x/mo.`}
               </div>
-
               <div className={styles.stream}>
                 <div className={styles.stream_values}>
-                  <span className={styles.number}>1000</span>
-                  {`${Coin.USDC}/mo.`}
+                  <span className={styles.number}>{personalFlow}</span>
+                  {`${coinA}/mo.`}
                 </div>
                 <div className={styles.date}>
                   {t('Runs out on')}
@@ -54,27 +98,35 @@ export const PanelChange: FC<IProps> = ({
               </div>
               <div className={styles.balances}>
                 <div className={styles.first_balance_container}>
-
-                  <CoinBalancePanel className={styles.currency_first_balance} name={Coin.USDC} balance="2.000.29548" />
+                  <CoinBalancePanel
+                    className={styles.currency_first_balance}
+                    name={coinA} 
+                    balance={balanceA}
+                  />
                 </div>
-                <CoinBalancePanel className={styles.currency_second_balance} name={Coin.WBTC} balance="0.39548" />
+                <CoinBalancePanel
+                  className={styles.currency_second_balance}
+                  name={coinB} 
+                  balance={balanceB}
+                />
               </div>
               <div className={styles.streaming}>
-                <span className={styles.number}>78,382.45</span>
-                {`${Coin.USDC}x/mo.`}
+                <span className={styles.number}>{totalFlow}</span>
+                {`${coinA}x/mo.`}
               </div>
               {inputShow && (
               <div className={styles.form_mob}>
                 <CoinRateForm
                   placeholder={placeholder}
                   value={value} 
-                  onChange={onChange} 
-                  onClickStart={onClickStart} 
-                  onClickStop={onClickStop}
+                  onChange={handleChange} 
+                  onClickStart={handleStart} 
+                  onClickStop={handleStop}
+                  coin={coinA}
+                  isLoading={isLoading}
                 />
               </div>
               )}
-
               {inputShow 
                 ? (
                   <FontIcon name={FontIconName.ArrowUp} className={styles.arrow_up} />
@@ -90,9 +142,11 @@ export const PanelChange: FC<IProps> = ({
             <CoinRateForm
               placeholder={placeholder}
               value={value} 
-              onChange={onChange} 
-              onClickStart={onClickStart} 
-              onClickStop={onClickStop}
+              onChange={handleChange} 
+              onClickStart={handleStart} 
+              onClickStop={handleStop}
+              coin={coinA}
+              isLoading={isLoading}
             />
           </div>
         )}
