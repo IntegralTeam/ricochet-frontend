@@ -24,110 +24,150 @@ import {
   maticxUsdcxExchangeAddress,
 } from './polygon_config';
 
-export const flowConfig = {
-  usdc_ric: {
-    superToken: usdcxRicExchangeAddress,
-    tokenA: USDCxAddress,
-    tokenB: RICAddress,
-    coinA: Coin.USDC,
-    coinB: Coin.RIC,
-  },
-  usdc_weth: {
+enum FlowEnum {
+  usdcWethFlowQuery = 'usdcWethFlowQuery',
+  daiMkrFlowQuery = 'daiMkrFlowQuery',
+  mkrDaiFlowQuery = 'mkrDaiFlowQuery',
+  usdcMkrFlowQuery = 'usdcMkrFlowQuery',
+  mkrUsdcFlowQuery = 'mkrUsdcFlowQuery',
+  daiMaticFlowQuery = 'daiMaticFlowQuery',
+  maticDaiFlowQuery = 'maticDaiFlowQuery',
+  usdcMaticFlowQuery = 'usdcMaticFlowQuery',
+  maticUsdcFlowQuery = 'usdcMaticFlowQuery',
+  daiEthFlowQuery = 'daiEthFlowQuery',
+  ethDaiFlowQuery = 'ethDaiFlowQuery',
+  usdcWbtcFlowQuery = 'usdcWbtcFlowQuery',
+  wethUsdcFlowQuery = 'wethUsdcFlowQuery',
+  wbtcUsdcFlowQuery = 'wbtcUsdcFlowQuery',
+  usdcRicFlowQuery = 'usdcRicFlowQuery',
+}
+
+export const flowConfig: {
+  superToken: string, 
+  tokenA: string, 
+  tokenB: string, 
+  coinA: Coin,
+  coinB: Coin,
+  flowKey: FlowEnum, 
+}[] = [
+  {
     superToken: usdcxWethxExchangeAddress,
     tokenA: USDCxAddress,
     tokenB: WETHxAddress,
     coinA: Coin.USDC,
     coinB: Coin.WETH,
+    flowKey: FlowEnum.usdcWethFlowQuery,
   },
-  usdc_wbtc: {
+  {
     superToken: usdcxWbtcxExchangeAddress,
     tokenA: USDCxAddress,
     tokenB: WBTCxAddress,
     coinA: Coin.USDC,
     coinB: Coin.WBTC,
+    flowKey: FlowEnum.usdcWbtcFlowQuery,
   },
-  weth_usdc: {
+  {
+    superToken: usdcxRicExchangeAddress,
+    tokenA: USDCxAddress,
+    tokenB: RICAddress,
+    coinA: Coin.USDC,
+    coinB: Coin.RIC,
+    flowKey: FlowEnum.usdcRicFlowQuery,
+  },
+  {
     superToken: wethxUsdcxExchangeAddress,
     tokenA: WETHxAddress,
     tokenB: USDCxAddress,
     coinA: Coin.WETH,
     coinB: Coin.USDC,
+    flowKey: FlowEnum.wethUsdcFlowQuery,
   },
-  wbtc_usdc: {
+  {
     superToken: wbtcxUsdcxExchangeAddress,
     tokenA: WBTCxAddress,
     tokenB: USDCxAddress,
     coinA: Coin.WBTC,
     coinB: Coin.USDC,
+    flowKey: FlowEnum.wbtcUsdcFlowQuery,
   },
-  dai_mkr: {
+  {
     superToken: daixMkrxExchangeAddress,
     tokenA: DAIxAddress,
     tokenB: MKRxAddress,
     coinA: Coin.DAI,
     coinB: Coin.MKR,
+    flowKey: FlowEnum.daiMkrFlowQuery,
   },
-  mkr_dai: {
+  {
     superToken: mkrxDaixExchangeAddress,
     tokenA: MKRxAddress,
     tokenB: DAIxAddress,
     coinA: Coin.MKR,
     coinB: Coin.DAI,
+    flowKey: FlowEnum.mkrDaiFlowQuery,
   },
-  usdc_mkr: {
+  {
     superToken: usdcxMkrxExchangeAddress,
     tokenA: USDCxAddress,
     tokenB: MKRxAddress,
     coinA: Coin.USDC,
     coinB: Coin.MKR,
+    flowKey: FlowEnum.usdcMkrFlowQuery,
   },
-  mkr_usdc: {
+  {
     superToken: mkrxUsdcxExchangeAddress,
     tokenA: MKRxAddress,
     tokenB: USDCxAddress,
     coinA: Coin.MKR,
     coinB: Coin.USDC,
+    flowKey: FlowEnum.mkrUsdcFlowQuery,
   },
-  dai_eth: {
+  {
     superToken: daixEthxExchangeAddress,
     tokenA: DAIxAddress,
     tokenB: WETHxAddress,
     coinA: Coin.DAI,
     coinB: Coin.ETH,
+    flowKey: FlowEnum.daiEthFlowQuery,
   },
-  eth_dai: {
+  {
     superToken: ethxDaixExchangeAddress,
     tokenA: WETHxAddress,
     tokenB: DAIxAddress,
     coinA: Coin.ETH,
     coinB: Coin.DAI,
+    flowKey: FlowEnum.ethDaiFlowQuery,
   },
-  dai_matic: {
+  {
     superToken: daixMaticxExchangeAddress,
     tokenA: DAIxAddress,
     tokenB: MATICxAddress,
     coinA: Coin.DAI,
     coinB: Coin.MATIC,
+    flowKey: FlowEnum.daiMaticFlowQuery,
   },
-  matic_dai: {
+  {
     superToken: maticxDaixExchangeAddress,
     tokenA: MATICxAddress,
     tokenB: DAIxAddress,
     coinA: Coin.MATIC,
     coinB: Coin.DAI,
+    flowKey: FlowEnum.maticDaiFlowQuery,
   },
-  usdc_matic: {
+  {
     superToken: usdcxMaticxExchangeAddress,
     tokenA: USDCxAddress,
     tokenB: MATICxAddress,
     coinA: Coin.USDC,
     coinB: Coin.MATIC,
+    flowKey: FlowEnum.usdcMaticFlowQuery,
   },
-  matic_usdc: {
+  {
     superToken: maticxUsdcxExchangeAddress,
     tokenA: MATICxAddress,
     tokenB: USDCxAddress,
     coinA: Coin.MATIC,
     coinB: Coin.USDC,
+    flowKey: FlowEnum.maticUsdcFlowQuery,
   },
-};
+];
