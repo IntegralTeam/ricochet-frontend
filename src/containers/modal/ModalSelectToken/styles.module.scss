@@ -148,10 +148,23 @@
   & span:nth-child(3n) {
     padding: 15px 0 0 0;
   }
+
+  .icon_button {
+    padding: 0;
+    background: transparent;
+    transition: 0.7s all;
+
+    &:hover,
+    &:active {
+      background: transparent;
+      opacity: 0.7;
+    }
+  
+  }
+  
+
 }
 
-.icon_button {
-}
 
 .icon_button {
   @include flexbox(center, center);
@@ -180,13 +193,6 @@
   min-height: 4 * 64px;
 }
 
-.coin_wrap {
-  @include flexbox(center, space-between);
-
-  padding: 0 !important;
-  background: transparent !important;
-}
-
 .coin_name_wrap {
   @include flexbox(flex-start, center);
 
@@ -203,6 +209,20 @@
   &:last-of-type {
     padding: 0;
   }
+
+  .coin_wrap {
+    @include flexbox(center, space-between);
+  
+    padding: 0;
+    background: transparent;
+    transition: 0.3s all;
+
+    &:hover {
+      opacity: 0.7;
+      background: transparent;
+    }
+  }
+
 }
 
 .coin_name {
@@ -255,10 +275,4 @@
   color: var(--color-grey);
   text-align: center;
   padding: 20px 0 20px 0;
-}
-
-.icon_button {
-  padding: 0 !important;
-  background: transparent !important;
-
 }

@@ -25,7 +25,7 @@
 
   &.primary {
     background-color: $color-button-primary;
-    color: $color-button-text;
+    color: $color-button-text-primary;
 
     &:hover, &:focus {
       background-color: $color-button-primary;
@@ -38,7 +38,7 @@
 
   &.secondary {
     background-color: $color-button-secondary;
-    color: $color-button-text;
+    color: $color-button-text-secondary;
 
     &:hover, &:focus {
       background-color: $color-button-secondary;

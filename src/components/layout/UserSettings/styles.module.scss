@@ -1,23 +1,26 @@
 @import "../../../assets/styles/mixins";
 
-.balance_panel {
-  @include flexbox(center, center);
+.user_settings {
 
-  max-width: 210px;
-  min-width: 0;
-  height: 33px !important;
-  background: var(--color-blue) !important;
-  border: 1px solid var(--color-blue) !important;
-  border-radius: 10px;
-  color: var(--color-white);
-  font-family: $default-font;
-  font-style: normal;
-  padding: 0;
-  cursor: pointer;
-
-  @include tablet {
-    width: 100%;
-    max-width: 100%;
+  .balance_panel {
+    @include flexbox(center, center);
+  
+    max-width: 210px;
+    min-width: 0;
+    height: 33px !important;
+    background: var(--color-blue);
+    border: 1px solid var(--color-blue);
+    border-radius: 10px;
+    color: var(--color-white);
+    font-family: $default-font;
+    font-style: normal;
+    padding: 0;
+    cursor: pointer;
+  
+    @include tablet {
+      width: 100%;
+      max-width: 100%;
+    }
   }
 }
 
@@ -32,20 +35,6 @@
   color: var(--color-white);
   width: 12px;
   height: 15.75px;
-}
-
-.language_panel {
-  @include flexbox(center, center);
-
-  min-width: 0;
-  height: 33px;
-  background: var(--color-blue) !important;
-  border: 1px solid var(--color-blue) !important;
-  border-radius: 10px;
-  color: var(--color-white) !important;
-  font-family: $default-font;
-  font-style: normal;
-  padding: 0;
 }
 
 .user_settings {
@@ -96,12 +85,15 @@
   padding: 7px 14px 9px 10px;
 }
 
-.button {
-  background: transparent !important;
-  border: none !important;
-  &:hover,
-  &:active {
+.dot_wrap {
+
+  .button {
     background: transparent;
+    border: none;
+    &:hover,
+    &:active {
+      background: transparent;
+    }
   }
 }
 
@@ -150,9 +142,6 @@
   color: var(--color-grey);
 }
 
-.lang_wrap {
-  padding: 20px 30px 20px 20px !important;
-}
 
 .lang {
   cursor: pointer;
@@ -174,7 +163,7 @@
 
 .settings_button {
   background-color: transparent;
-  border: none !important;
+  border: none;
 }
 
 .lang_button {

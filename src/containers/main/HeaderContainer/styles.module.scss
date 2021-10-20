@@ -39,6 +39,8 @@
   @include tablet {
     display: none;
   }
+
+  
 }
 
 .dca_link {
@@ -47,7 +49,7 @@
 
 .dca_link,
 .upgrade_link {
-  color: var(--color-white-dark) !important;
+  color: var(--color-white-dark);
   font-family: $default-font;
   font-style: normal;
   font-weight: normal;
@@ -59,14 +61,14 @@
   
   &:active,
   &:checked {
-    color: var(--color-white) !important;
+    color: var(--color-white) ;
     font-weight: bold;
     text-decoration: underline;
   }
 }
 
 .active {
-  color: var(--color-white) !important;
+  color: var(--color-white);
   font-weight: bold;
   text-decoration-line: underline;
 }
@@ -79,6 +81,14 @@
     display: block;
     padding: 29px 23px 45px 0;
   }
+
+  .menu_button {
+    background: transparent;
+    padding: 0 ;
+    border: none;
+  }
+  
+
 }
 
 .mob_panel {
@@ -113,10 +123,4 @@
 .dot {
   color: var(--color-white-dark);
   margin: 0 0 0 23px;
-}
-
-.menu_button {
-  background: transparent !important;
-  padding: 0 !important;
-  border: none !important;
 }

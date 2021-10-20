@@ -79,12 +79,6 @@
   border:none;
 }
 
-.start {
-  color: var(--color-white);
-  background: var(--color-blue) !important;
-
-}
-
 .start_wrap {
   padding: 0 8px 0 0;
 
@@ -100,10 +94,4 @@
     flex: 0 0 40%;
     
   }
-}
-
-.stop {
-  color: var(--color-blue) !important;
-  background: var(--color-white) !important;
-  
 }

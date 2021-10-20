@@ -34,14 +34,14 @@ export const CoinRateForm: FC<IProps> = ({
       </div>
       <div className={styles.buttons}>
         <div className={styles.start_wrap}>
-          <ButtonNew onClick={onClickStart} className={styles.start}>
+          <ButtonNew color="primary" onClick={onClickStart} className={styles.start}>
             {t('Start')}
             /
             {t('Edit')}
           </ButtonNew>
         </div>
         <div className={styles.stop_wrap}>
-          <ButtonNew onClick={onClickStop} className={styles.stop}>{t('Stop')}</ButtonNew>
+          <ButtonNew color="secondary" onClick={onClickStop} className={styles.stop}>{t('Stop')}</ButtonNew>
         </div>
       </div>
     </div>

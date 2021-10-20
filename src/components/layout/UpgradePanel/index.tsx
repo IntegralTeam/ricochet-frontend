@@ -30,7 +30,8 @@ export const UpgradePanel: FC<IProps> = ({
     <section className={styles.panel}>
       <div className={styles.container}>
         <div className={styles.wrap}>
-          <CoinBalance 
+          <CoinBalance
+            className={styles.label} 
             nameCoin={nameCoin} 
             balance={balance} 
             onSelectToken={onSelectToken}

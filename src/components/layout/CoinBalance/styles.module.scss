@@ -9,20 +9,6 @@
   margin: 0 0 0 10px;
 }
 
-.label {
-  @include flexbox(center, center);
-
-  cursor: pointer;
-  background: transparent !important;
-  border: none;
-  padding: 0;
-
-
-  &:active {
-    background: var(--color-blue-light);
-  }
-}
-
 .container_balance {
   @include flexbox(center, center);
 

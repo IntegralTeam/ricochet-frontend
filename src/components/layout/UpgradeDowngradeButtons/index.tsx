@@ -22,6 +22,7 @@ export const UpgradeDowngradeButtons: FC<IProps> = ({
         <div className={styles.buttons_upgrade}>
           <div className={styles.approve_wrap}>
             <ButtonNew
+              color="secondary"
               disabled={isLoading}
               onClick={onClickApprove}
               className={styles.approve}
@@ -32,6 +33,7 @@ export const UpgradeDowngradeButtons: FC<IProps> = ({
           </div>
           <div className={styles.upgrade_wrap}>
             <ButtonNew
+              color="primary"
               disabled={isLoading} 
               onClick={onClickUpgrade}
               className={styles.upgrade}
@@ -45,6 +47,7 @@ export const UpgradeDowngradeButtons: FC<IProps> = ({
       : (
         <div className={styles.downgrade_wrap}>
           <ButtonNew
+            color="primary"
             disabled={isLoading} 
             onClick={onClickDowngrade}
             className={styles.downgrade}
