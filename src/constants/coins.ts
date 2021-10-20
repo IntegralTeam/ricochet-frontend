@@ -18,6 +18,8 @@ export enum Coin {
   DAI = 'DAI',
   MATIC = 'MATIC',
   MKR = 'MKR',
+  RIC = 'RIC',
+  WETH = 'ETH',
 }
 
 export const namesCoin = [
@@ -30,6 +32,8 @@ export const namesCoin = [
   Coin.DAI,
   Coin.MATIC,
   Coin.MKR,
+  Coin.RIC,
+  Coin.WETH,
 ];
 
 export const iconsCoin: Record<Coin, string> = {
@@ -42,4 +46,6 @@ export const iconsCoin: Record<Coin, string> = {
   [Coin.DAI]: dai,
   [Coin.MATIC]: matic,
   [Coin.MKR]: mkr,
+  [Coin.RIC]: mkr,
+  [Coin.WETH]: eth,
 };

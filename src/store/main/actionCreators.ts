@@ -340,3 +340,47 @@ export const wbtcUsdcStartFlow = (
   type: MainActionTypes.WBTC_USDC_START_FLOW,
   payload: { amount: payload, callback },
 });
+
+export const subscriptionRicUsdcWbtc = (callback: (e?: string) => void) => ({
+  type: MainActionTypes.SUBSCRIPTION_RIC_USDC_WBTC,
+  callback,
+});
+
+export const subscriptionRicUsdcWeth = (callback: (e?: string) => void) => ({
+  type: MainActionTypes.SUBSCRIPTION_RIC_USDC_WETH,
+  callback,
+});
+
+export const subscriptionRicWbtcUsdc = (callback: (e?: string) => void) => ({
+  type: MainActionTypes.SUBSCRIPTION_RIC_WBTC_USDC,
+  callback,
+});
+
+export const subscriptionRicWethUsdc = (callback: (e?: string) => void) => ({
+  type: MainActionTypes.SUBSCRIPTION_RIC_WETH_USDC,
+  callback,
+});
+
+export const startFlowAction = (payload: string, 
+  config: { [key: string]: string },
+  callback: (e?: string) => void) => ({
+  type: MainActionTypes.START_FLOW,
+  payload: { amount: payload, config, callback },
+});
+
+export const stopFlowAction = (
+  config: { [key:string]: string },
+  callback: (e?: string) => void,
+) => ({
+  type: MainActionTypes.STOP_FLOW,
+  payload: { callback, config },
+});
+
+export const downgradeAction = (
+  value: string,
+  tokenAddress: string,
+  callback: (e?:string) => void,
+) => ({
+  type: MainActionTypes.DOWNGRADE,
+  payload: { tokenAddress, value, callback },
+});

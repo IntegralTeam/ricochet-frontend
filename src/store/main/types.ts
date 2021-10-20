@@ -95,7 +95,7 @@ export type MainState = {
     flowsOwned: string,
     totalFlows: number,
     placeholder: string,
-  }
+  } 
   isLoadingUsdcDowngrade: boolean,
   isLoadingUsdcUpgrade: boolean,
   isLoadingMkrDowngrade: boolean,
@@ -121,4 +121,7 @@ export type MainState = {
   isLoadingWethDownGrade: boolean,
   isLoadingWethUpgrade: boolean,
   isLoadingWethFlow: boolean,
+  
+  isLoadingDowngrade: boolean,
+  isLoading: boolean,
 };

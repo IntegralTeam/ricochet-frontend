@@ -29,6 +29,8 @@ export const mainInitialState: Readonly<MainState> = {
   isLoadingWethDownGrade: false,
   isLoadingWethUpgrade: false,
   isLoadingWethFlow: false,
+  isLoadingDowngrade: false,
+  isLoading: true,
 };
 
 export default createReducer(mainInitialState, MAIN_HANDLERS);
