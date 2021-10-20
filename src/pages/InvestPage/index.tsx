@@ -31,7 +31,7 @@ const InvestPage: FC<IProps> = () => {
         <HeaderContainer balance={balances && balances[RICAddress]} address={address || 'Connecting'} />
       </div>
       <div className={styles.content}>
-        <InvestContainer balance={balances && balances[RICAddress]} address={address || 'Connecting'} />
+        <InvestContainer />
       </div>
     
     </MainLayout>
