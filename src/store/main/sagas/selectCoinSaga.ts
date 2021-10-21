@@ -2,11 +2,22 @@ import { put } from 'redux-saga/effects';
 import { ModalType } from '../../modal/types';
 import { modalShow, modalHide } from '../../modal/actionCreators';
 
-import { mainSetState, selectCoin, showTokenList } from '../actionCreators';
+import {
+  mainSetState, selectDowngradeCoin, selectUpgradeCoin, showTokenList, 
+} from '../actionCreators';
 
-export function* selectCoinSaga({ payload }: ReturnType<typeof selectCoin>) {
+export function* selectUpgradeCoinSaga({ payload }: ReturnType<typeof selectUpgradeCoin>) {
   try {
-    yield put(mainSetState({ selectedCoin: payload.selectedCoin }));
+    yield put(mainSetState({ selectedUpgradeCoin: payload.selectedUpgradeCoin }));
+    yield put(modalHide());
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export function* selectDowngradeCoinSaga({ payload }: ReturnType<typeof selectDowngradeCoin>) {
+  try {
+    yield put(mainSetState({ selectedDowngradeCoin: payload.selectedDowngradeCoin }));
     yield put(modalHide());
   } catch (e) {
     console.log(e);

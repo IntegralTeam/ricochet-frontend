@@ -127,6 +127,7 @@ export type MainState = {
   isLoadingDowngrade: boolean,
   isLoadingUpgrade: boolean,
   isLoading: boolean,
-  selectedCoin: Coin,
+  selectedDowngradeCoin: Coin, 
+  selectedUpgradeCoin: Coin,
   coinType: Coin
 };

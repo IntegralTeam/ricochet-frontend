@@ -1,5 +1,6 @@
-import { Coin, namesCoin, namesCoinX } from 'constants/coins';
+import { Coin } from 'constants/coins';
 import { downgradeTokensList } from 'constants/downgradeConfig';
+import { upgradeTokensList } from 'constants/upgradeConfig';
 import { ModalSelectToken } from 'containers/modal/ModalSelectToken';
 import { useShallowSelector } from 'hooks/useShallowSelector';
 import React, {
@@ -10,9 +11,14 @@ import React, {
   useEffect,
 } from 'react';
 import { useDispatch } from 'react-redux';
-import { selectCoin } from 'store/main/actionCreators';
+import { selectDowngradeCoin, selectUpgradeCoin } from 'store/main/actionCreators';
 import { selectMain } from 'store/main/selectors';
 
+export interface UpgradeTokenConfig {
+  coin: Coin,
+  tokenAddress: string,
+  
+}
 interface IProps {
   onCloseModal: () => void
 }
@@ -20,27 +26,36 @@ interface IProps {
 export const ModalContainer: FC<IProps> = ({ onCloseModal }) => {
   const dispatch = useDispatch();
 
-  const { coinType } = useShallowSelector(selectMain);
+  const { coinType, balances } = useShallowSelector(selectMain);
 
-  const [tokensList, setTokensList] = useState<Coin[]>(namesCoinX);
+  const [tokensList, setTokensList] = useState<UpgradeTokenConfig[]>(upgradeTokensList);
+
+  const [filteredList, setFilteredList] = useState<UpgradeTokenConfig[]>([]);
 
   useEffect(() => {
     if (downgradeTokensList.find((el) => el.coin === coinType)) {
-      setTokensList(namesCoinX);
+      setTokensList(downgradeTokensList);
     } else {
-      setTokensList(namesCoin);
+      setTokensList(upgradeTokensList);
     }
   }, [coinType]);
   
   const onSelectCoin = useCallback((coin: Coin) => {
-    dispatch(selectCoin(coin));
+    if (downgradeTokensList.find((el) => el.coin === coin)) {
+      dispatch(selectDowngradeCoin(coin));
+    } else {
+      dispatch(selectUpgradeCoin(coin));
+    }
   }, [dispatch]);
 
   const [searchTerm, setSearchTerm] = useState('');
   
   const onSearch = useCallback((e:ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-  }, [searchTerm, setSearchTerm]);
+    const { value } = e.target;
+    setSearchTerm(value);
+    const filtered = tokensList.filter((el) => el.coin.includes(value.toUpperCase()));
+    setFilteredList(filtered);
+  }, [searchTerm, setSearchTerm, setFilteredList, filteredList]);
 
   return (
     <ModalSelectToken
@@ -49,6 +64,8 @@ export const ModalContainer: FC<IProps> = ({ onCloseModal }) => {
       onChange={onSearch}
       onCloseModal={onCloseModal}
       tokensList={tokensList}
+      filteredList={searchTerm ? filteredList : tokensList}
+      balances={balances}
     />
   );
 };

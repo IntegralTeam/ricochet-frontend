@@ -29,16 +29,10 @@ export enum Coin {
 
 export const namesCoin = [
   Coin.USDC,
-  Coin.WBTC,
-  Coin.ETH,
-  Coin.USDT,
-  Coin.SHIB,
-  Coin.BTC,
   Coin.DAI,
-  Coin.MATIC,
   Coin.MKR,
-  Coin.RIC,
   Coin.WETH,
+  Coin.WBTC,
 ];
 
 export const namesCoinX = [
@@ -62,8 +56,8 @@ export const iconsCoin: Partial<Record<Coin, string>> = {
   [Coin.RIC]: mkr,
   [Coin.WETH]: eth,
   [Coin.DAIx]: dai,
-  [Coin.MKRx]: dai,
-  [Coin.USDCx]: dai,
-  [Coin.WBTCx]: dai,
-  [Coin.WETHx]: dai,
+  [Coin.MKRx]: mkr,
+  [Coin.USDCx]: usdc,
+  [Coin.WBTCx]: wbtc,
+  [Coin.WETHx]: eth,
 };

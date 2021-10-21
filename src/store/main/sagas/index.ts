@@ -66,7 +66,7 @@ import {
 } from './startFlow';
 import { mainCheckSaga } from './mainCheckSaga';
 import { switchNetworkSaga } from './switchNetworkSaga';
-import { selectCoinSaga, showTokenListSaga } from './selectCoinSaga';
+import { selectDowngradeCoinSaga, selectUpgradeCoinSaga, showTokenListSaga } from './selectCoinSaga';
 
 export default function* mainSaga() {
   yield takeLeading(MainActionTypes.MAIN_CHECK, mainCheckSaga);
@@ -127,6 +127,7 @@ export default function* mainSaga() {
   yield takeLeading(MainActionTypes.APPROVE, approveMainSaga);
   yield takeLeading(MainActionTypes.UPGRADE, upgradeMainSaga);
 
-  yield takeLeading(MainActionTypes.SELECT_COIN, selectCoinSaga);
+  yield takeLeading(MainActionTypes.SELECT_DOWNGRADE_COIN, selectDowngradeCoinSaga);
+  yield takeLeading(MainActionTypes.SELECT_UPGRADE_COIN, selectUpgradeCoinSaga);
   yield takeLeading(MainActionTypes.SHOW_TYPE_TOKEN_LIST, showTokenListSaga);
 }

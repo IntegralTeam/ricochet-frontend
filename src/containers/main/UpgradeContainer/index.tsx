@@ -23,10 +23,16 @@ interface IProps {
 }
 
 export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
-  const [downgradeCoin, setDowngradeCoin] = useState(Coin.DAIx);
+  const state = useShallowSelector(selectMain);
+  const {
+    balances, isLoading, isLoadingDowngrade, 
+    isLoadingUpgrade, selectedDowngradeCoin, selectedUpgradeCoin,
+  } = state;
+  
+  const [downgradeCoin, setDowngradeCoin] = useState(selectedDowngradeCoin);
   const [downgradeAddress, setDowngradeAddress] = useState('');
   const [downgradeValue, setDownGradeValue] = useState('');
-  const [upgradeCoin, setUpgradeCoin] = useState(Coin.DAI);
+  const [upgradeCoin, setUpgradeCoin] = useState(selectedUpgradeCoin);
   const [upgradeConfig, setUpgradeConfig] = useState<{  
     coin: Coin,
     tokenAddress: string,
@@ -38,10 +44,7 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
   const dispatch = useDispatch();
 
   const { language, changeLanguage, t } = useLang();
-  const state = useShallowSelector(selectMain);
-  const {
-    balances, isLoading, isLoadingDowngrade, isLoadingUpgrade, selectedCoin,
-  } = state;
+  
   const handleVisionModal = (coinType: Coin) => {
     dispatch(showTokenList(coinType));
   };
@@ -53,12 +56,12 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
   };
 
   useEffect(() => {
-    const coin = downgradeTokensList.find((el) => el.coin === selectedCoin);
+    const coin = downgradeTokensList.find((el) => el.coin === selectedDowngradeCoin);
     if (coin) {
       setDowngradeAddress(coin.tokenAddress);
       setDowngradeCoin(coin.coin);
     }
-  }, [selectedCoin]);
+  }, [selectedDowngradeCoin]);
 
   const handleDowngradeValue = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setDownGradeValue(e.target.value);
@@ -72,12 +75,12 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
   }, [dispatch, downgradeAddress, downgradeValue]);
 
   useEffect(() => {
-    const coin = upgradeTokensList.find((el) => el.coin === selectedCoin);
+    const coin = upgradeTokensList.find((el) => el.coin === selectedUpgradeCoin);
     if (coin) {
       setUpgradeConfig(coin);
       setUpgradeCoin(coin.coin);
     }
-  }, [selectedCoin]);
+  }, [selectedUpgradeCoin]);
 
   const handleUpgradeValue = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setUpgradeValue(e.target.value);

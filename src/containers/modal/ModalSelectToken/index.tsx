@@ -1,6 +1,7 @@
 import ButtonNew from 'components/common/ButtonNew';
 import { FontIcon, FontIconName } from 'components/common/FontIcon';
 import { TextInput } from 'components/common/TextInput';
+import { UpgradeTokenConfig } from 'containers/main/ModalContainer';
 import { useLang } from 'hooks/useLang';
 import React, {
   ChangeEvent,
@@ -11,20 +12,18 @@ import styles from './styles.module.scss';
 
 interface IProps {
   value: string,
-  tokensList: Coin[],
+  tokensList: UpgradeTokenConfig[],
+  filteredList: UpgradeTokenConfig[],
+  balances?: { [key:string]: string },
   onSelectCoin: (value: Coin) => void,
   onChange: (e:ChangeEvent<HTMLInputElement>) => void,
   onCloseModal: () => void
 }
 
 export const ModalSelectToken: FC<IProps> = ({
-  onSelectCoin, value, onChange, onCloseModal, tokensList,
+  onSelectCoin, value, onChange, onCloseModal, tokensList, filteredList, balances,
 }) => {
   const { t } = useLang();
-  let resultsCoin: Coin[] = [...new Array(10).fill(Coin.ETH), ...tokensList];
-  resultsCoin = !value 
-    ? resultsCoin 
-    : resultsCoin.filter((coin) => coin.toUpperCase().includes(value.toUpperCase()));
 
   return (
     <>
@@ -54,30 +53,30 @@ export const ModalSelectToken: FC<IProps> = ({
             <div className={styles.common}>Common bases</div>
           </div>    
           <div className={styles.icon_wrap}>
-            {tokensList.map((name) => (
-              <span key={name}>
+            {tokensList.map(({ coin }) => (
+              <span key={coin}>
                 <ButtonNew
                   className={styles.icon_button}
-                  onClick={() => onSelectCoin(name)}
+                  onClick={() => onSelectCoin(coin)}
                 >
-                  <img src={iconsCoin[name]} alt={name} />
-                  <div className={styles.icon_name}>{name}</div>
+                  <img src={iconsCoin[coin]} alt={coin} />
+                  <div className={styles.icon_name}>{coin}</div>
                 </ButtonNew>
               </span>
             ))}
           </div>
-          {(resultsCoin.length > 0) 
+          {(filteredList.length > 0) 
             ? (
               <div className={styles.table_wrap}>
                 <div className={styles.table}>
-                  {resultsCoin.map((name) => (
-                    <div key={name} className={styles.row_wrap}>
+                  {filteredList.map(({ coin, tokenAddress }) => (
+                    <div key={coin} className={styles.row_wrap}>
               
-                      <ButtonNew className={styles.coin_wrap} onClick={() => onSelectCoin(name)}>
-                        <img src={iconsCoin[name]} alt={name} />
+                      <ButtonNew className={styles.coin_wrap} onClick={() => onSelectCoin(coin)}>
+                        <img src={iconsCoin[coin]} alt={coin} />
                         <div className={styles.coin_name_wrap}>
                           <div className={styles.coin_name}>
-                            {name}
+                            {coin}
                           </div>
                           <div className={styles.description}>
                             {t('Ethereum')}
@@ -87,7 +86,7 @@ export const ModalSelectToken: FC<IProps> = ({
 
                       <div className={styles.rate_wrap}>
                         <div className={styles.rate}>
-                          153.2396
+                          {balances && (+balances[tokenAddress]).toFixed(6)}
                         </div>
                       </div>
                     </div>

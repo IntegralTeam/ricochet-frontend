@@ -5,7 +5,8 @@ import { MainState } from './types';
 
 export const mainInitialState: Readonly<MainState> = {
   address: '',
-  selectedCoin: Coin.DAI,
+  selectedDowngradeCoin: Coin.DAIx, 
+  selectedUpgradeCoin: Coin.DAI,
   coinType: Coin.DAI,
   isLoadingUsdcDowngrade: false,
   isLoadingUsdcUpgrade: false,

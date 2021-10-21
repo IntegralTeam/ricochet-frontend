@@ -408,9 +408,14 @@ export const upgradeAction = (
   payload: { value: amount, superTokenAddress, callback },
 });
 
-export const selectCoin = (selectedCoin: Coin) => ({
-  type: MainActionTypes.SELECT_COIN,
-  payload: { selectedCoin },
+export const selectUpgradeCoin = (selectedUpgradeCoin: Coin) => ({
+  type: MainActionTypes.SELECT_UPGRADE_COIN,
+  payload: { selectedUpgradeCoin },
+});
+
+export const selectDowngradeCoin = (selectedDowngradeCoin: Coin) => ({
+  type: MainActionTypes.SELECT_DOWNGRADE_COIN,
+  payload: { selectedDowngradeCoin },
 });
 
 export const showTokenList = (coinType: Coin) => ({
