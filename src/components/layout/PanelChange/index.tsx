@@ -60,12 +60,12 @@ export const PanelChange: FC<IProps> = ({
   };
 
   const handleStart = useCallback(() => {
-    if (!!balanceA || Number(value) < 0) {
+    if (Number(balanceA) <= 0 || Number(value) < 0) {
       return;
     }
     setIsLoading(true);
     onClickStart(value, callback);
-  }, [value]);
+  }, [value, balanceA]);
 
   const handleStop = useCallback(() => {
     setIsLoading(true);
