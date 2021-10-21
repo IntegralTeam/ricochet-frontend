@@ -1,7 +1,7 @@
 import ButtonNew from 'components/common/ButtonNew';
 import { FontIcon, FontIconName } from 'components/common/FontIcon';
 import { TextInput } from 'components/common/TextInput';
-import { useLang } from 'hooks/useLang';
+import { useTranslation } from 'i18n';
 import React, {
   ChangeEvent,
   FC,
@@ -19,7 +19,7 @@ interface IProps {
 export const ModalSelectToken: FC<IProps> = ({
   onSelectCoin, value, onChange, onCloseModal, 
 }) => {
-  const { t } = useLang();
+  const { t } = useTranslation('main');
   let resultsCoin: Coin[] = [...new Array(10).fill(Coin.ETH), ...namesCoin];
   resultsCoin = !value 
     ? resultsCoin 
