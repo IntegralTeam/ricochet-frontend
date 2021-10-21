@@ -1,4 +1,5 @@
 import { put } from 'redux-saga/effects';
+import { transformError } from 'utils/transformError';
 import { ModalType } from '../../modal/types';
 import { modalShow, modalHide } from '../../modal/actionCreators';
 
@@ -11,7 +12,7 @@ export function* selectUpgradeCoinSaga({ payload }: ReturnType<typeof selectUpgr
     yield put(mainSetState({ selectedUpgradeCoin: payload.selectedUpgradeCoin }));
     yield put(modalHide());
   } catch (e) {
-    console.log(e);
+    transformError(e);
   }
 }
 
@@ -20,7 +21,7 @@ export function* selectDowngradeCoinSaga({ payload }: ReturnType<typeof selectDo
     yield put(mainSetState({ selectedDowngradeCoin: payload.selectedDowngradeCoin }));
     yield put(modalHide());
   } catch (e) {
-    console.log(e);
+    transformError(e);
   }
 }
 
@@ -29,6 +30,6 @@ export function* showTokenListSaga({ payload }: ReturnType<typeof showTokenList>
     yield put(mainSetState({ coinType: payload.coinType }));
     yield put(modalShow(ModalType.SelectToken));
   } catch (e) {
-    console.log(e);
+    transformError(e);
   }
 }
