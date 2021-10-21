@@ -70,11 +70,11 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
   }, []);
 
   const handleDowngrade = useCallback(() => {
-    if (Number(downgradeValue) < 0 || (balances && !balances[downgradeAddress])) {
+    if (Number(downgradeValue) <= 0 || (balances && Number(balances[downgradeAddress]) === 0)) {
       return;
     }
     dispatch(downgradeAction(downgradeValue, downgradeAddress, callback));
-  }, [dispatch, downgradeAddress, downgradeValue]);
+  }, [dispatch, downgradeAddress, downgradeValue, balances]);
 
   useEffect(() => {
     const coin = upgradeTokensList.find((el) => el.coin === selectedUpgradeCoin);
@@ -90,17 +90,17 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
 
   const handleUpgrade = useCallback(() => {
     if (Number(upgradeValue) < 0 || 
-    (balances && upgradeConfig && !balances[upgradeConfig.tokenAddress])) {
+    (balances && upgradeConfig && Number(balances[upgradeConfig.tokenAddress]) === 0)) {
       return;
     }
     if (upgradeConfig) {
       dispatch(upgradeAction(upgradeValue, upgradeConfig?.tokenAddress, callback));
     }
-  }, [dispatch, upgradeConfig, upgradeValue]);
+  }, [dispatch, upgradeConfig, upgradeValue, balances]);
   
   const handleApprove = useCallback(() => {
     if (Number(upgradeValue) < 0 || 
-    (balances && upgradeConfig && !balances[upgradeConfig.tokenAddress])) {
+    (balances && upgradeConfig && Number(balances[upgradeConfig.tokenAddress]) === 0)) {
       return;
     }
     if (upgradeConfig) {
