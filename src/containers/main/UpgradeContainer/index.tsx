@@ -32,7 +32,6 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
   
   const [downgradeCoin, setDowngradeCoin] = useState(selectedDowngradeCoin);
   const [downgradeAddress, setDowngradeAddress] = useState('');
-  const [upgradeAddress, setUpgradeAddress] = useState('');
   const [downgradeValue, setDownGradeValue] = useState('');
   const [upgradeCoin, setUpgradeCoin] = useState(selectedUpgradeCoin);
   const [upgradeConfig, setUpgradeConfig] = useState<{  
@@ -82,7 +81,6 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
     if (coin) {
       setUpgradeConfig(coin);
       setUpgradeCoin(coin.coin);
-      setUpgradeAddress(coin.superTokenAddress);
     }
   }, [selectedUpgradeCoin]);
 
@@ -95,7 +93,9 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
     (balances && upgradeConfig && !balances[upgradeConfig.tokenAddress])) {
       return;
     }
-    dispatch(upgradeAction(upgradeValue, upgradeAddress, callback));
+    if (upgradeConfig) {
+      dispatch(upgradeAction(upgradeValue, upgradeConfig?.tokenAddress, callback));
+    }
   }, [dispatch, upgradeConfig, upgradeValue]);
   
   const handleApprove = useCallback(() => {
@@ -123,7 +123,9 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
           </div>
           <UpgradePanel
             placeholder={t('Input Amount')}
-            balance={balances && (+balances[upgradeAddress]).toFixed(6)} 
+            balance={balances && 
+              upgradeConfig &&
+               (+balances[upgradeConfig?.tokenAddress]).toFixed(6)} 
             nameCoin={upgradeCoin}
             onChange={handleUpgradeValue}
             onClickApprove={handleApprove}
