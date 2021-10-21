@@ -1,9 +1,12 @@
+import { Coin } from 'constants/coins';
 import { createReducer } from 'utils/createReducer';
 import { MAIN_HANDLERS } from './handlers';
 import { MainState } from './types';
 
 export const mainInitialState: Readonly<MainState> = {
   address: '',
+  selectedCoin: Coin.DAI,
+  coinType: Coin.DAI,
   isLoadingUsdcDowngrade: false,
   isLoadingUsdcUpgrade: false,
   isLoadingDaiDowngrade: false,
@@ -30,6 +33,7 @@ export const mainInitialState: Readonly<MainState> = {
   isLoadingWethUpgrade: false,
   isLoadingWethFlow: false,
   isLoadingDowngrade: false,
+  isLoadingUpgrade: false,
   isLoading: true,
 };
 

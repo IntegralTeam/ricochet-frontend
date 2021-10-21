@@ -11,7 +11,7 @@ interface IProps {
   nameCoin: Coin,
   balance?: number,
   className: string,
-  onSelectToken?: () => void,
+  onSelectToken: (coin: Coin) => void,
 }
 
 export const CoinBalance: FC<IProps> = ({
@@ -22,7 +22,7 @@ export const CoinBalance: FC<IProps> = ({
   return (
     <ButtonNew
       className={className}
-      onClick={onSelectToken}
+      onClick={() => onSelectToken(nameCoin)}
     >
       <div className={styles.container_balance}>
         <img src={iconsCoin[nameCoin]} alt={nameCoin} />

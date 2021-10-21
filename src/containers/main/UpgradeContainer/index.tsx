@@ -1,13 +1,20 @@
+import { showErrorToast } from 'components/common/Toaster';
 import { UpgradePanel } from 'components/layout/UpgradePanel';
 import { UserSettings } from 'components/layout/UserSettings';
 import { Coin } from 'constants/coins';
 import { useLang } from 'hooks/useLang';
 import React, {
-  FC,
+  ChangeEvent,
+  FC, useCallback, useState, useEffect,
 } from 'react';
 import { useDispatch } from 'react-redux';
-import { modalShow } from 'store/modal/actionCreators';
-import { ModalType } from 'store/modal/types';
+import {
+  approveAction, downgradeAction, showTokenList, upgradeAction, 
+} from 'store/main/actionCreators';
+import { useShallowSelector } from 'hooks/useShallowSelector';
+import { selectMain } from 'store/main/selectors';
+import { downgradeTokensList } from 'constants/downgradeConfig';
+import { upgradeTokensList } from 'constants/upgradeConfig';
 import styles from './styles.module.scss';
 
 interface IProps {
@@ -16,12 +23,89 @@ interface IProps {
 }
 
 export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
-  const { language, changeLanguage, t } = useLang();
-
+  const [downgradeCoin, setDowngradeCoin] = useState(Coin.DAIx);
+  const [downgradeAddress, setDowngradeAddress] = useState('');
+  const [downgradeValue, setDownGradeValue] = useState('');
+  const [upgradeCoin, setUpgradeCoin] = useState(Coin.DAI);
+  const [upgradeConfig, setUpgradeConfig] = useState<{  
+    coin: Coin,
+    tokenAddress: string,
+    superTokenAddress: string,
+    multi?: number,
+    key: 'hasWethApprove' | 'hasUsdcApprove' | 'hasWbtcApprove' | 'hasDaiApprove' | 'hasMkrApprove',
+  }>();
+  const [upgradeValue, setUpgradeValue] = useState('');
   const dispatch = useDispatch();
-  const handleVisionModal = () => {
-    dispatch(modalShow(ModalType.SelectToken));
+
+  const { language, changeLanguage, t } = useLang();
+  const state = useShallowSelector(selectMain);
+  const {
+    balances, isLoading, isLoadingDowngrade, isLoadingUpgrade, selectedCoin,
+  } = state;
+  const handleVisionModal = (coinType: Coin) => {
+    dispatch(showTokenList(coinType));
   };
+
+  const callback = (e?: string) => {
+    if (e) {
+      showErrorToast(e, 'Error');
+    }
+  };
+
+  useEffect(() => {
+    const coin = downgradeTokensList.find((el) => el.coin === selectedCoin);
+    if (coin) {
+      setDowngradeAddress(coin.tokenAddress);
+      setDowngradeCoin(coin.coin);
+    }
+  }, [selectedCoin]);
+
+  const handleDowngradeValue = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setDownGradeValue(e.target.value);
+  }, []);
+
+  const handleDowngrade = useCallback(() => {
+    if (Number(downgradeValue) < 0 || (balances && !balances[downgradeAddress])) {
+      return;
+    }
+    dispatch(downgradeAction(downgradeValue, downgradeAddress, callback));
+  }, [dispatch, downgradeAddress, downgradeValue]);
+
+  useEffect(() => {
+    const coin = upgradeTokensList.find((el) => el.coin === selectedCoin);
+    if (coin) {
+      setUpgradeConfig(coin);
+      setUpgradeCoin(coin.coin);
+    }
+  }, [selectedCoin]);
+
+  const handleUpgradeValue = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setUpgradeValue(e.target.value);
+  }, []);
+
+  const handleUpgrade = useCallback(() => {
+    if (Number(upgradeValue) < 0 || 
+    (balances && upgradeConfig && !balances[upgradeConfig.tokenAddress])) {
+      return;
+    }
+    dispatch(upgradeAction(downgradeValue, downgradeAddress, callback));
+  }, [dispatch, upgradeConfig, upgradeValue]);
+  
+  const handleApprove = useCallback(() => {
+    if (Number(upgradeValue) < 0 || 
+    (balances && upgradeConfig && !balances[upgradeConfig.tokenAddress])) {
+      return;
+    }
+    if (upgradeConfig) {
+      dispatch(approveAction(
+        upgradeValue,
+        upgradeConfig?.tokenAddress,
+        upgradeConfig.superTokenAddress,
+        callback,
+        upgradeConfig.multi,
+      ));
+    }
+  }, [upgradeValue, balances, upgradeConfig]);
 
   return (
     <div className={styles.wrapper}>
@@ -32,16 +116,16 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
           </div>
           <UpgradePanel
             placeholder={t('Input Amount')}
-            balance={1053} 
-            nameCoin={Coin.USDC}
-            onChange={() => console.log()}
-            onClickApprove={() => console.log()}
-            onClickUpgrade={() => console.log()}
-            onClickDowngrade={() => console.log()}
-            value=""
+            balance={balances && (+balances[downgradeAddress]).toFixed(6)} 
+            nameCoin={upgradeCoin}
+            onChange={handleUpgradeValue}
+            onClickApprove={handleApprove}
+            onClickUpgrade={handleUpgrade}
+            value={upgradeValue}
             isUpgrade
-            isLoading
             onSelectToken={handleVisionModal}
+            isLoading={isLoading || isLoadingUpgrade}
+            disabledApprove={upgradeConfig && state[upgradeConfig?.key]}
           />
         </div>
         <div className={styles.downgrade}>
@@ -49,17 +133,15 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
             {t('Downgrade')}
           </div>
           <UpgradePanel 
-            balance={593} 
-            nameCoin={Coin.WBTC}
-            onChange={() => console.log()}
-            onClickApprove={() => console.log()}
-            onClickUpgrade={() => console.log()}
-            onClickDowngrade={() => console.log()}
+            balance={balances && (+balances[downgradeAddress]).toFixed(6)} 
+            nameCoin={downgradeCoin}
+            onChange={handleDowngradeValue}
+            onClickDowngrade={handleDowngrade}
             placeholder={t('Input Amount')} 
-            value=""
+            value={downgradeValue}
             isUpgrade={false}
-            isLoading={false}
             onSelectToken={handleVisionModal}
+            isLoading={isLoading || isLoadingDowngrade}
           />
         </div>
         <div className={styles.settings_mob}>

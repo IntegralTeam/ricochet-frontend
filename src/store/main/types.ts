@@ -1,3 +1,5 @@
+import { Coin } from '../../constants/coins';
+
 export type MainState = {
   address: string;
   balances?: { [key:string]: string };
@@ -123,5 +125,8 @@ export type MainState = {
   isLoadingWethFlow: boolean,
   
   isLoadingDowngrade: boolean,
+  isLoadingUpgrade: boolean,
   isLoading: boolean,
+  selectedCoin: Coin,
+  coinType: Coin
 };

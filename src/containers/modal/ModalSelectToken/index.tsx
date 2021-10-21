@@ -6,21 +6,22 @@ import React, {
   ChangeEvent,
   FC,
 } from 'react';
-import { Coin, iconsCoin, namesCoin } from '../../../constants/coins';
+import { Coin, iconsCoin } from '../../../constants/coins';
 import styles from './styles.module.scss';
 
 interface IProps {
   value: string,
-  onSelectCoin: () => void
+  tokensList: Coin[],
+  onSelectCoin: (value: Coin) => void,
   onChange: (e:ChangeEvent<HTMLInputElement>) => void,
   onCloseModal: () => void
 }
 
 export const ModalSelectToken: FC<IProps> = ({
-  onSelectCoin, value, onChange, onCloseModal, 
+  onSelectCoin, value, onChange, onCloseModal, tokensList,
 }) => {
   const { t } = useLang();
-  let resultsCoin: Coin[] = [...new Array(10).fill(Coin.ETH), ...namesCoin];
+  let resultsCoin: Coin[] = [...new Array(10).fill(Coin.ETH), ...tokensList];
   resultsCoin = !value 
     ? resultsCoin 
     : resultsCoin.filter((coin) => coin.toUpperCase().includes(value.toUpperCase()));
@@ -53,11 +54,11 @@ export const ModalSelectToken: FC<IProps> = ({
             <div className={styles.common}>Common bases</div>
           </div>    
           <div className={styles.icon_wrap}>
-            {namesCoin.map((name) => (
+            {tokensList.map((name) => (
               <span key={name}>
                 <ButtonNew
                   className={styles.icon_button}
-                  onClick={onSelectCoin}
+                  onClick={() => onSelectCoin(name)}
                 >
                   <img src={iconsCoin[name]} alt={name} />
                   <div className={styles.icon_name}>{name}</div>
@@ -72,7 +73,7 @@ export const ModalSelectToken: FC<IProps> = ({
                   {resultsCoin.map((name) => (
                     <div key={name} className={styles.row_wrap}>
               
-                      <ButtonNew className={styles.coin_wrap} onClick={onSelectCoin}>
+                      <ButtonNew className={styles.coin_wrap} onClick={() => onSelectCoin(name)}>
                         <img src={iconsCoin[name]} alt={name} />
                         <div className={styles.coin_name_wrap}>
                           <div className={styles.coin_name}>

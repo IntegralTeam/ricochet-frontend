@@ -15,6 +15,7 @@ import {
   approveUsdcSaga,
   approveWethSaga,
   approveWbtcSaga,
+  approveMainSaga,
 } from './approveSaga';
 import {
   upgradeMkrSaga,
@@ -22,6 +23,7 @@ import {
   upgradeUsdcSaga,
   upgradeWethSaga,
   upgradeWbtcSaga,
+  upgradeMainSaga,
 } from './upgradeSaga';
 import {
   subscriptionUsdcSaga, subscriptionWethSaga,
@@ -64,6 +66,7 @@ import {
 } from './startFlow';
 import { mainCheckSaga } from './mainCheckSaga';
 import { switchNetworkSaga } from './switchNetworkSaga';
+import { selectCoinSaga, showTokenListSaga } from './selectCoinSaga';
 
 export default function* mainSaga() {
   yield takeLeading(MainActionTypes.MAIN_CHECK, mainCheckSaga);
@@ -121,4 +124,9 @@ export default function* mainSaga() {
   yield takeLeading(MainActionTypes.START_FLOW, startFlowSaga);
   yield takeLeading(MainActionTypes.STOP_FLOW, stopFlowSaga);
   yield takeLeading(MainActionTypes.DOWNGRADE, downgradeMainSaga);
+  yield takeLeading(MainActionTypes.APPROVE, approveMainSaga);
+  yield takeLeading(MainActionTypes.UPGRADE, upgradeMainSaga);
+
+  yield takeLeading(MainActionTypes.SELECT_COIN, selectCoinSaga);
+  yield takeLeading(MainActionTypes.SHOW_TYPE_TOKEN_LIST, showTokenListSaga);
 }

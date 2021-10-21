@@ -1,6 +1,6 @@
-import { Coin } from 'constants/coins';
+import { Coin } from './coins';
 import {
-  USDCxAddress,
+  USDCxAddress, 
   WETHxAddress,
   DAIxAddress,
   MKRxAddress,

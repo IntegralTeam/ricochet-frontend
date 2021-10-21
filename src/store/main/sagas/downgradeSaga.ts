@@ -30,6 +30,7 @@ export function* downgradeMainSaga({ payload }: ReturnType<typeof downgradeActio
 
     const { tokenAddress, value } = payload;
     const amount = web3.utils.toWei(value, 'ether');
+
     const address: Unwrap<typeof getAddress> = yield call(getAddress);
     const contract: Unwrap<typeof getContract> = yield call(
       getContract,
