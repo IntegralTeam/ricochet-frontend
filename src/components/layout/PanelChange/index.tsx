@@ -5,6 +5,7 @@ import React, {
 import { FontIcon, FontIconName } from 'components/common/FontIcon';
 import { showErrorToast } from 'components/common/Toaster';
 import { useTranslation } from 'i18n';
+import { generateDate } from 'utils/generateDate';
 import styles from './styles.module.scss';
 import { Coin } from '../../../constants/coins';
 import { CoinChange } from '../CoinChange';
@@ -72,6 +73,8 @@ export const PanelChange: FC<IProps> = ({
     onClickStop(callback);
   }, [callback]);
 
+  const date = generateDate(balanceA, personalFlow);
+
   return (
     <>
       <section className={styles.panel}>
@@ -93,7 +96,7 @@ export const PanelChange: FC<IProps> = ({
                 <div className={styles.date}>
                   {t('Runs out on')}
                   :
-                  <span className={styles.number_date}>11/04/21</span>
+                  <span className={styles.number_date}>{date}</span>
                 </div>
               </div>
               <div className={styles.balances}>
