@@ -8,6 +8,7 @@ import Link from 'components/common/Link';
 import { MobileMenu } from 'components/layout/MobileMenu';
 import { useLang } from 'hooks/useLang';
 import ButtonNew from 'components/common/ButtonNew';
+import { useTranslation } from 'i18n';
 import styles from './styles.module.scss';
 import logo from '../../../assets/images/logo.svg';
 import menuImg from '../../../assets/images/menu.svg';
@@ -19,7 +20,8 @@ interface IProps {
 
 export const HeaderContainer:FC<IProps> = ({ address, balance }) => {
   const location = useLocation();
-  const { language, changeLanguage, t } = useLang();
+  const { language, changeLanguage } = useLang();
+  const { t } = useTranslation('main');
 
   const [isShowMenu, setIsShowMenu] = useState(false);
 

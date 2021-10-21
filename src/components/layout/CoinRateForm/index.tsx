@@ -3,7 +3,7 @@ import React, {
   ChangeEvent,
   FC,
 } from 'react';
-import { useLang } from 'hooks/useLang';
+import { useTranslation } from 'i18n';
 import ButtonNew from '../../common/ButtonNew';
 import { Coin } from '../../../constants/coins';
 import styles from './styles.module.scss';
@@ -21,7 +21,7 @@ interface IProps {
 export const CoinRateForm: FC<IProps> = ({
   value, onChange, onClickStart, onClickStop, placeholder, coin, isLoading,
 }) => {
-  const { t } = useLang();
+  const { t } = useTranslation('main');
  
   return (
     <div className={styles.input_container}>

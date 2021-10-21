@@ -15,6 +15,7 @@ import { useShallowSelector } from 'hooks/useShallowSelector';
 import { selectMain } from 'store/main/selectors';
 import { downgradeTokensList } from 'constants/downgradeConfig';
 import { upgradeTokensList } from 'constants/upgradeConfig';
+import { useTranslation } from 'i18n';
 import styles from './styles.module.scss';
 
 interface IProps {
@@ -43,8 +44,9 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
   const [upgradeValue, setUpgradeValue] = useState('');
   const dispatch = useDispatch();
 
-  const { language, changeLanguage, t } = useLang();
-  
+  const { language, changeLanguage } = useLang();
+  const { t } = useTranslation('main');
+
   const handleVisionModal = (coinType: Coin) => {
     dispatch(showTokenList(coinType));
   };

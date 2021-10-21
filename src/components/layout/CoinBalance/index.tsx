@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { FontIcon, FontIconName } from 'components/common/FontIcon';
 import ButtonNew from 'components/common/ButtonNew';
-import { useLang } from 'hooks/useLang';
+import { useTranslation } from 'i18n';
 import { Coin, iconsCoin } from '../../../constants/coins';
 import styles from './styles.module.scss';
 
@@ -17,7 +17,7 @@ interface IProps {
 export const CoinBalance: FC<IProps> = ({
   nameCoin, balance, onSelectToken, className,
 }) => {
-  const { t } = useLang();
+  const { t } = useTranslation('main');
   
   return (
     <ButtonNew
