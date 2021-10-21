@@ -3,8 +3,8 @@ import React, {
   FC, useCallback, useEffect, useState,
 } from 'react';
 import { FontIcon, FontIconName } from 'components/common/FontIcon';
-import { useLang } from 'hooks/useLang';
 import { showErrorToast } from 'components/common/Toaster';
+import { useTranslation } from 'i18n';
 import styles from './styles.module.scss';
 import { Coin } from '../../../constants/coins';
 import { CoinChange } from '../CoinChange';
@@ -39,7 +39,7 @@ export const PanelChange: FC<IProps> = ({
   const [inputShow, setInputShow] = useState(false);
   const [value, setValue] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const { t } = useLang();
+  const { t } = useTranslation('main');
 
   useEffect(() => {
     setIsLoading(mainLoading);

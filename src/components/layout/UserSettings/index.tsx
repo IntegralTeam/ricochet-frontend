@@ -5,8 +5,8 @@ import { FontIcon, FontIconName } from 'components/common/FontIcon';
 import { Dropdown } from 'components/common/Dropdown';
 import { LocaleKey, localeNames } from 'i18n/utils';
 import ButtonNew from 'components/common/ButtonNew';
-import { useLang } from 'hooks/useLang';
 import { trimPad } from 'utils/balances';
+import { useTranslation } from 'i18n';
 import styles from './styles.module.scss';
 import { SelectLanguage } from '../SelectLanguage';
 
@@ -21,7 +21,7 @@ interface IProps {
 export const UserSettings: FC<IProps> = ({
   onSelectLanguage, ricBalance = '', account, language, className,
 }) => {
-  const { t } = useLang();
+  const { t } = useTranslation('main');
   return (
     <div className={styles.user_settings}>
       <ButtonNew className={styles.balance_panel}>
@@ -65,7 +65,7 @@ export const UserSettings: FC<IProps> = ({
                 </li>
                 <li className={styles.paper}>
                   <a className={styles.head} href="https://docs.ricochet.exchange/" target="_blank" rel="noreferrer">{t('White Paper')}</a>
-                  <span className={styles.description}>{t('Check out our fundamential ideas')}</span>
+                  <span className={styles.description}>{t('Check out our fundamental ideas')}</span>
                 </li>
                 <li className={styles.discord}>
                   <a className={styles.head} href="https://discord.gg/mss4t2ED3y" target="_blank" rel="noreferrer">{t('Discord')}</a>
