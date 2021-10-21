@@ -8,16 +8,16 @@
   @include flexbox(center, center);
 
   position: relative;
-}
 
-.img_usd,
-.img_bitcoin {
-  position: absolute;
-  height: 32px;
-  width: 32px;
-  padding: 0 !important;
-  background: transparent !important;
-  border: none;
+  & .img_usd,
+  .img_bitcoin {
+    position: absolute;
+    height: 32px;
+    width: 32px;
+    padding: 0;
+    background: transparent;
+    border: none;
+  }
 }
 
 .img_bitcoin {

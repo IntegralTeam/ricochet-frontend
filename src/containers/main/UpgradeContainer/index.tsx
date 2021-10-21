@@ -8,9 +8,9 @@ import React, {
   FC, useCallback, useState, useEffect,
 } from 'react';
 import { useDispatch } from 'react-redux';
-import { approveAction, downgradeAction, upgradeAction } from 'store/main/actionCreators';
-import { modalShow } from 'store/modal/actionCreators';
-import { ModalType } from 'store/modal/types';
+import {
+  approveAction, downgradeAction, showTokenList, upgradeAction, 
+} from 'store/main/actionCreators';
 import { useShallowSelector } from 'hooks/useShallowSelector';
 import { selectMain } from 'store/main/selectors';
 import { downgradeTokensList } from 'constants/downgradeConfig';
@@ -24,10 +24,17 @@ interface IProps {
 }
 
 export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
-  const [downgradeCoin] = useState(Coin.DAIx);
+  const state = useShallowSelector(selectMain);
+  const {
+    balances, isLoading, isLoadingDowngrade, 
+    isLoadingUpgrade, selectedDowngradeCoin, selectedUpgradeCoin,
+  } = state;
+  
+  const [downgradeCoin, setDowngradeCoin] = useState(selectedDowngradeCoin);
   const [downgradeAddress, setDowngradeAddress] = useState('');
+  const [upgradeAddress, setUpgradeAddress] = useState('');
   const [downgradeValue, setDownGradeValue] = useState('');
-  const [upgradeCoin] = useState(Coin.DAI);
+  const [upgradeCoin, setUpgradeCoin] = useState(selectedUpgradeCoin);
   const [upgradeConfig, setUpgradeConfig] = useState<{  
     coin: Coin,
     tokenAddress: string,
@@ -40,12 +47,9 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
 
   const { language, changeLanguage } = useLang();
   const { t } = useTranslation('main');
-  const state = useShallowSelector(selectMain);
-  const {
-    balances, isLoading, isLoadingDowngrade, isLoadingUpgrade, 
-  } = state;
-  const handleVisionModal = () => {
-    dispatch(modalShow(ModalType.SelectToken));
+
+  const handleVisionModal = (coinType: Coin) => {
+    dispatch(showTokenList(coinType));
   };
 
   const callback = (e?: string) => {
@@ -55,11 +59,12 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
   };
 
   useEffect(() => {
-    const coin = downgradeTokensList.find((el) => el.coin === downgradeCoin);
+    const coin = downgradeTokensList.find((el) => el.coin === selectedDowngradeCoin);
     if (coin) {
       setDowngradeAddress(coin.tokenAddress);
+      setDowngradeCoin(coin.coin);
     }
-  }, [downgradeCoin]);
+  }, [selectedDowngradeCoin]);
 
   const handleDowngradeValue = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setDownGradeValue(e.target.value);
@@ -73,11 +78,13 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
   }, [dispatch, downgradeAddress, downgradeValue]);
 
   useEffect(() => {
-    const coin = upgradeTokensList.find((el) => el.coin === upgradeCoin);
+    const coin = upgradeTokensList.find((el) => el.coin === selectedUpgradeCoin);
     if (coin) {
       setUpgradeConfig(coin);
+      setUpgradeCoin(coin.coin);
+      setUpgradeAddress(coin.superTokenAddress);
     }
-  }, [upgradeCoin]);
+  }, [selectedUpgradeCoin]);
 
   const handleUpgradeValue = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setUpgradeValue(e.target.value);
@@ -88,7 +95,7 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
     (balances && upgradeConfig && !balances[upgradeConfig.tokenAddress])) {
       return;
     }
-    dispatch(upgradeAction(downgradeValue, downgradeAddress, callback));
+    dispatch(upgradeAction(upgradeValue, upgradeAddress, callback));
   }, [dispatch, upgradeConfig, upgradeValue]);
   
   const handleApprove = useCallback(() => {
@@ -116,7 +123,7 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
           </div>
           <UpgradePanel
             placeholder={t('Input Amount')}
-            balance={balances && (+balances[downgradeAddress]).toFixed(6)} 
+            balance={balances && (+balances[upgradeAddress]).toFixed(6)} 
             nameCoin={upgradeCoin}
             onChange={handleUpgradeValue}
             onClickApprove={handleApprove}

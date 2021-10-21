@@ -17,7 +17,7 @@ interface IProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void,
   onClickApprove?: () => void,
   onClickUpgrade?: () => void,
-  onSelectToken: () => void,
+  onSelectToken: (coin: Coin) => void,
   onClickDowngrade?: () => void
   isLoading?: boolean;
   disabledApprove?:boolean;
@@ -32,7 +32,8 @@ export const UpgradePanel: FC<IProps> = ({
     <section className={styles.panel}>
       <div className={styles.container}>
         <div className={styles.wrap}>
-          <CoinBalance 
+          <CoinBalance
+            className={styles.label} 
             nameCoin={nameCoin} 
             balance={Number(balance)} 
             onSelectToken={onSelectToken}

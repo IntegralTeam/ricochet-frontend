@@ -1,3 +1,4 @@
+import { Coin } from 'constants/coins';
 import { MainActionTypes } from './actionTypes';
 import { MainState } from './types';
 
@@ -405,4 +406,19 @@ export const upgradeAction = (
 ) => ({
   type: MainActionTypes.UPGRADE,
   payload: { value: amount, superTokenAddress, callback },
+});
+
+export const selectUpgradeCoin = (selectedUpgradeCoin: Coin) => ({
+  type: MainActionTypes.SELECT_UPGRADE_COIN,
+  payload: { selectedUpgradeCoin },
+});
+
+export const selectDowngradeCoin = (selectedDowngradeCoin: Coin) => ({
+  type: MainActionTypes.SELECT_DOWNGRADE_COIN,
+  payload: { selectedDowngradeCoin },
+});
+
+export const showTokenList = (coinType: Coin) => ({
+  type: MainActionTypes.SHOW_TYPE_TOKEN_LIST,
+  payload: { coinType },
 });

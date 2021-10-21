@@ -10,18 +10,19 @@ import styles from './styles.module.scss';
 interface IProps {
   nameCoin: Coin,
   balance?: number,
-  onSelectToken?: () => void,
+  className: string,
+  onSelectToken: (coin: Coin) => void,
 }
 
 export const CoinBalance: FC<IProps> = ({
-  nameCoin, balance, onSelectToken,
+  nameCoin, balance, onSelectToken, className,
 }) => {
   const { t } = useTranslation('main');
   
   return (
     <ButtonNew
-      className={styles.label}
-      onClick={onSelectToken}
+      className={className}
+      onClick={() => onSelectToken(nameCoin)}
     >
       <div className={styles.container_balance}>
         <img src={iconsCoin[nameCoin]} alt={nameCoin} />

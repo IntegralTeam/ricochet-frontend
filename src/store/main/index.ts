@@ -1,9 +1,13 @@
+import { Coin } from 'constants/coins';
 import { createReducer } from 'utils/createReducer';
 import { MAIN_HANDLERS } from './handlers';
 import { MainState } from './types';
 
 export const mainInitialState: Readonly<MainState> = {
   address: '',
+  selectedDowngradeCoin: Coin.DAIx, 
+  selectedUpgradeCoin: Coin.DAI,
+  coinType: Coin.DAI,
   isLoadingUsdcDowngrade: false,
   isLoadingUsdcUpgrade: false,
   isLoadingDaiDowngrade: false,

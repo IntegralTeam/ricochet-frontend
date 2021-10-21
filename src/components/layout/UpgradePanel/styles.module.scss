@@ -1,4 +1,4 @@
-@import '../../../assets/styles/mixins';
+@import "../../../assets/styles/mixins";
 
 .panel {
   @include flexbox(center, center);
@@ -9,7 +9,6 @@
   width: 100%;
   font-size: 14px;
   font-family: $default-font;
-
 }
 
 .container {
@@ -21,10 +20,26 @@
   @include tablet {
     padding: 10px;
   }
-}
 
-.wrap {
-  @include flexbox(center, flex-start);
+  .wrap {
+    @include flexbox(center, flex-start);
+  
+    .label {
+      @include flexbox(center, center);
+  
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      padding: 0;
+      transition: 0.7s all;
+  
+      &:hover,
+      &:active {
+        background: transparent;
+        opacity: 0.7;
+      }
+    }
+  }
 }
 
 
@@ -61,7 +76,6 @@
 }
 
 .buttons {
-  
   @include tablet {
     display: none;
   }
@@ -76,5 +90,3 @@
     width: 100%;
   }
 }
-
-
