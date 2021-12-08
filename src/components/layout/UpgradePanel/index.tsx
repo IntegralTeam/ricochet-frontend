@@ -18,15 +18,26 @@ interface IProps {
   onClickApprove?: () => void,
   onClickUpgrade?: () => void,
   onSelectToken: (coin: Coin) => void,
-  onClickDowngrade?: () => void
+  onClickDowngrade?: () => void,
+  onClickMax?: () => void,
   isLoading?: boolean;
   disabledApprove?:boolean;
 }
 
 export const UpgradePanel: FC<IProps> = ({
-  balance = '', nameCoin, placeholder, isLoading, 
+  balance = '',
+  nameCoin,
+  placeholder,
+  isLoading,
   disabledApprove,
-  onChange, onClickApprove, onClickUpgrade, onClickDowngrade, value, isUpgrade, onSelectToken, 
+  onChange,
+  onClickApprove,
+  onClickUpgrade,
+  onClickDowngrade,
+  onClickMax,
+  value,
+  isUpgrade,
+  onSelectToken,
 }) => (
   <section className={styles.panel_mob}>
     <section className={styles.panel}>
@@ -37,6 +48,7 @@ export const UpgradePanel: FC<IProps> = ({
             nameCoin={nameCoin} 
             balance={Number(balance)} 
             onSelectToken={onSelectToken}
+            onClickMax={onClickMax}
           />
         </div>
         <div className={styles.input_wrap}>
@@ -47,6 +59,8 @@ export const UpgradePanel: FC<IProps> = ({
             containerClassName={styles.container_input} 
             placeholder={placeholder}
             type="number"
+            onClickMax={onClickMax}
+            isLoading={isLoading}
           />
         </div>
         <div className={styles.buttons}>

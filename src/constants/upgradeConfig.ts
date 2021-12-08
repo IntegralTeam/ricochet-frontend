@@ -1,23 +1,27 @@
 import { Coin } from './coins';
 import {
   DAIAddress,
-  USDCAddress,
-  MKRAddress,
-  WETHAddress,
-  USDCxAddress,
   DAIxAddress,
-  MKRxAddress,
+  USDCAddress,
+  USDCxAddress,
+  WETHAddress,
   WETHxAddress,
-  WBTCxAddress,
+  MKRAddress,
+  MKRxAddress,
   WBTCAddress,
+  WBTCxAddress,
+  WMATICAddress,
+  MATICxAddress,
+  SUSHIAddress,
+  SUSHIxAddress,
 } from './polygon_config';
 
 export const upgradeTokensList:{  
   coin: Coin,
   tokenAddress: string,
   superTokenAddress: string,
-  multi?: number,
-  key: 'hasWethApprove' | 'hasUsdcApprove' | 'hasWbtcApprove' | 'hasDaiApprove' | 'hasMkrApprove',
+  multi: number,
+  key: 'hasWethApprove' | 'hasUsdcApprove' | 'hasWbtcApprove' | 'hasDaiApprove' | 'hasMkrApprove' | 'hasMaticApprove' | 'hasSushiApprove',
 }[] = [
   {
     coin: Coin.USDC,
@@ -30,18 +34,21 @@ export const upgradeTokensList:{
     coin: Coin.DAI,
     tokenAddress: DAIAddress,
     superTokenAddress: DAIxAddress,
+    multi: 1e18,
     key: 'hasDaiApprove',
   },
   {
     coin: Coin.MKR,
     tokenAddress: MKRAddress,
     superTokenAddress: MKRxAddress,
+    multi: 1e18,
     key: 'hasMkrApprove',
   },
   {
     coin: Coin.WETH,
     tokenAddress: WETHAddress,
     superTokenAddress: WETHxAddress,
+    multi: 1e18,
     key: 'hasWethApprove',
   },
   {
@@ -50,5 +57,19 @@ export const upgradeTokensList:{
     superTokenAddress: WBTCxAddress,
     multi: 1e8,
     key: 'hasWbtcApprove',
+  },
+  {
+    coin: Coin.MATIC,
+    tokenAddress: WMATICAddress,
+    superTokenAddress: MATICxAddress,
+    multi: 1e18,
+    key: 'hasMaticApprove',
+  },
+  {
+    coin: Coin.SUSHI,
+    tokenAddress: SUSHIAddress,
+    superTokenAddress: SUSHIxAddress,
+    multi: 1e18,
+    key: 'hasSushiApprove',
   },
 ];

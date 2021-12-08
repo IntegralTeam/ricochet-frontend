@@ -10,12 +10,16 @@ interface IProps {
   onClickUpgrade?: () => void,
   onClickDowngrade?: () => void,
   isLoading?: boolean;
-  disabledApprove?:boolean;
+  disabledApprove?: boolean;
 }
 
 export const UpgradeDowngradeButtons: FC<IProps> = ({
-  isUpgrade, isLoading, disabledApprove, onClickApprove = () => {},
-  onClickUpgrade = () => {}, onClickDowngrade = () => {},
+  isUpgrade,
+  isLoading,
+  disabledApprove,
+  onClickApprove = () => {},
+  onClickUpgrade = () => {},
+  onClickDowngrade = () => {},
 }) => (
   <div>
     {isUpgrade 

@@ -38,8 +38,8 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
     coin: Coin,
     tokenAddress: string,
     superTokenAddress: string,
-    multi?: number,
-    key: 'hasWethApprove' | 'hasUsdcApprove' | 'hasWbtcApprove' | 'hasDaiApprove' | 'hasMkrApprove',
+    multi: number,
+    key: 'hasWethApprove' | 'hasUsdcApprove' | 'hasWbtcApprove' | 'hasDaiApprove' | 'hasMkrApprove' | 'hasMaticApprove' | 'hasSushiApprove',
   }>();
   const [upgradeValue, setUpgradeValue] = useState('');
   const dispatch = useDispatch();
@@ -94,7 +94,12 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
       return;
     }
     if (upgradeConfig) {
-      dispatch(upgradeAction(upgradeValue, upgradeConfig?.tokenAddress, callback));
+      dispatch(upgradeAction(
+        upgradeValue,
+        upgradeConfig?.superTokenAddress,
+        callback,
+        upgradeConfig.multi,
+      ));
     }
   }, [dispatch, upgradeConfig, upgradeValue, balances]);
   
@@ -114,6 +119,18 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
     }
   }, [upgradeValue, balances, upgradeConfig]);
 
+  const handleMaxUpgrade = () => {
+    if (!balances || !upgradeConfig) return;
+
+    setUpgradeValue(balances[upgradeConfig.tokenAddress]);
+  };
+
+  const handleMaxDowngrade = () => {
+    if (!balances || !downgradeAddress) return;
+
+    setDownGradeValue(balances[downgradeAddress]);
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
@@ -130,6 +147,7 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
             onChange={handleUpgradeValue}
             onClickApprove={handleApprove}
             onClickUpgrade={handleUpgrade}
+            onClickMax={handleMaxUpgrade}
             value={upgradeValue}
             isUpgrade
             onSelectToken={handleVisionModal}
@@ -146,6 +164,7 @@ export const UpgradeContainer:FC<IProps> = ({ address, balance }) => {
             nameCoin={downgradeCoin}
             onChange={handleDowngradeValue}
             onClickDowngrade={handleDowngrade}
+            onClickMax={handleMaxDowngrade}
             placeholder={t('Input Amount')} 
             value={downgradeValue}
             isUpgrade={false}

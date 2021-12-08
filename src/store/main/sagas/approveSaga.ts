@@ -1,12 +1,5 @@
 import { approve } from 'api/ethereum';
 import { erc20ABI } from 'constants/abis';
-import {
-  USDCAddress, USDCxAddress,
-  DAIAddress, DAIxAddress,
-  MKRAddress, MKRxAddress,
-  WETHAddress, WETHxAddress,
-  WBTCAddress, WBTCxAddress,
-} from 'constants/polygon_config';
 import { call, put, all } from 'redux-saga/effects';
 import { Unwrap } from 'types/unwrap';
 import { getAddress } from 'utils/getAddress';
@@ -14,11 +7,6 @@ import { getContract } from 'utils/getContract';
 import web3 from 'utils/web3instance';
 import { transformError } from 'utils/transformError';
 import {
-  usdcApprove,
-  daiApprove,
-  wethApprove,
-  wbtcApprove,
-  mkrApprove,
   mainSetState,
   approveAction,
 } from '../actionCreators';
@@ -28,6 +16,8 @@ import {
   checkIfApproveMkr,
   checkIfApproveWeth,
   checkIfApproveWbtc,
+  checkIfApproveSushi, 
+  checkIfApproveMatic,
 } from './checkIfApprove';
 import { getBalances } from './getBalances';
 
@@ -42,7 +32,11 @@ export function* approveSaga(
     tokenAddress,
     erc20ABI,
   );
-  yield call(approve, contract, address, superTokenAddress, amount);
+  // max uint256 is (2 ** 256 - 1)
+  let uint256Max = web3.utils.toBN(amount).toString();
+  uint256Max = web3.utils.toBN('2').pow(web3.utils.toBN('256')).sub(web3.utils.toBN('1')).toString(); 
+  // Allow max instead of amount
+  yield call(approve, contract, address, superTokenAddress, uint256Max); 
   yield call(getBalances, address);
 }
 
@@ -52,7 +46,8 @@ export function* approveMainSaga({ payload }: ReturnType<typeof approveAction>) 
     const {
       tokenAddress, superTokenAddress, value, multi, 
     } = payload;
-    const amount = web3.utils.toWei((Number(value) * (multi || 1)).toString(), 'wei');
+    const amount = web3.utils.toWei((Number(value) * (multi)).toString(), 'wei');
+    
     yield call(approveSaga, tokenAddress, superTokenAddress, amount);
     payload.callback();
     yield all([
@@ -61,86 +56,13 @@ export function* approveMainSaga({ payload }: ReturnType<typeof approveAction>) 
       call(checkIfApproveDai),
       call(checkIfApproveWeth),
       call(checkIfApproveWbtc),
+      call(checkIfApproveSushi),
+      call(checkIfApproveMatic),
     ]);
   } catch (e) {
     const error = transformError(e);
     payload.callback(error);
   } finally {
     yield put(mainSetState({ isLoadingUpgrade: false }));
-  }
-}
-
-export function* approveUsdcSaga({ payload }: ReturnType<typeof usdcApprove>) {
-  try {
-    yield put(mainSetState({ isLoadingUsdcUpgrade: true }));
-    const amount = web3.utils.toWei((Number(payload.value) * 1e6).toString(), 'wei');
-    yield call(approveSaga, USDCAddress, USDCxAddress, amount);
-    payload.callback();
-    yield call(checkIfApproveUsdc);
-  } catch (e) {
-    const error = transformError(e);
-    payload.callback(error);
-  } finally {
-    yield put(mainSetState({ isLoadingUsdcUpgrade: false }));
-  }
-}
-
-export function* approveDaiSaga({ payload }: ReturnType<typeof daiApprove>) {
-  try {
-    yield put(mainSetState({ isLoadingDaiUpgrade: true }));
-    const amount = web3.utils.toWei(payload.value);
-    yield call(approveSaga, DAIAddress, DAIxAddress, amount);
-    payload.callback();
-    yield call(checkIfApproveDai);
-  } catch (e) {
-    const error = transformError(e);
-    payload.callback(error);
-  } finally {
-    yield put(mainSetState({ isLoadingDaiUpgrade: false }));
-  }
-}
-
-export function* approveMkrSaga({ payload }: ReturnType<typeof mkrApprove>) {
-  try {
-    yield put(mainSetState({ isLoadingMkrUpgrade: true }));
-    const amount = web3.utils.toWei(payload.value);
-    yield call(approveSaga, MKRAddress, MKRxAddress, amount);
-    payload.callback();
-    yield call(checkIfApproveMkr);
-  } catch (e) {
-    const error = transformError(e);
-    payload.callback(error);
-  } finally {
-    yield put(mainSetState({ isLoadingMkrUpgrade: false }));
-  }
-}
-
-export function* approveWethSaga({ payload }: ReturnType<typeof wethApprove>) {
-  try {
-    yield put(mainSetState({ isLoadingWethUpgrade: true }));
-    const amount = web3.utils.toWei(payload.value);
-    yield call(approveSaga, WETHAddress, WETHxAddress, amount);
-    payload.callback();
-    yield call(checkIfApproveWeth);
-  } catch (e) {
-    const error = transformError(e);
-    payload.callback(error);
-  } finally {
-    yield put(mainSetState({ isLoadingWethUpgrade: false }));
-  }
-}
-
-export function* approveWbtcSaga({ payload }: ReturnType<typeof wbtcApprove>) {
-  try {
-    yield put(mainSetState({ isLoadingWbtcUpgrade: true }));
-    const amount = web3.utils.toWei((Number(payload.value) * 1e8).toString(), 'wei');
-    yield call(approveSaga, WBTCAddress, WBTCxAddress, amount);
-    payload.callback();
-    yield call(checkIfApproveWbtc);
-  } catch (e) {
-    const error = transformError(e);
-    payload.callback(error);
-  } finally {
-    yield put(mainSetState({ isLoadingWbtcUpgrade: false }));
   }
 }

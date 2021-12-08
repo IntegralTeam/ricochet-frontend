@@ -17,5 +17,14 @@
   "Total Value Streaming": "Total Value Streaming",
   "Documentations for users of Ricochet": "Documentations for users of Ricochet",
   "Check out our fundamental ideas": "Check out our fundamental ideas",
-  "Join the community on Discord": "Join the community on Discord"
+  "Join the community on Discord": "Join the community on Discord",
+  "Upgrade": "Upgrade",
+  "Input Amount": "Input Amount",
+  "Downgrade": "Downgrade",
+  "Ethereum": "Ethereum",
+  "Ricochet contracts have not been audited, use at your own risk.": "Ricochet contracts have not been audited, use at your own risk.",
+  "Ricochet takes a 2% fee on swaps.": "Ricochet takes a 2% fee on swaps.", 
+  "Terms": "Terms",
+  "Read our terms of service": "Read our terms of service", 
+  "Ricochet Exchange smart contracts are unaudited, use at your own risk.": "Ricochet Exchange smart contracts are unaudited, use at your own risk."
 }

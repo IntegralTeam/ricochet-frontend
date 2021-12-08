@@ -3,7 +3,14 @@ import { getAddress } from 'utils/getAddress';
 import { chainSettings } from 'constants/chainSettings';
 import web3 from 'utils/web3instance';
 import { CoinOption } from 'types/coinOption';
-import { RICAddress } from 'constants/polygon_config';
+import {
+  RICAddress,
+  SLPxAddress,
+  SUSHIxAddress,
+  MATICxAddress,
+} from 'constants/polygon_config';
+
+const gasPrice = 35_000_000_000; // 35 gwei default gas
 
 export const downgrade = (
   contract: any,
@@ -11,7 +18,22 @@ export const downgrade = (
   address: string,
 ) => contract.methods
   .downgrade(amount)
-  .send({ from: address });
+  .send({ 
+    from: address, 
+    gasPrice,
+  });
+  
+export const downgradeMatic = (
+  contract: any,
+  amount: string,
+  address: string,
+) => contract.methods
+  .downgradeToETH(amount)
+  .send({ 
+    from: address, 
+    // value: amount,
+    gasPrice,
+  });
 
 export const allowance = (
   contract: any,
@@ -28,7 +50,10 @@ export const approve = (
   amount: string,
 ) => contract.methods
   .approve(tokenAddress, amount)
-  .send({ from: address });
+  .send({ 
+    from: address, 
+    gasPrice,
+  });
 
 export const upgrade = (
   contract: any,
@@ -36,7 +61,24 @@ export const upgrade = (
   address: string,
 ) => contract.methods
   .upgrade(amount)
-  .send({ from: address });
+  .send({ 
+    from: address, 
+    gasPrice,
+  });
+
+export const upgradeMatic = (
+  contract: any,
+  amount: string,
+  address: string,
+) => {
+  contract.methods
+    .upgradeByETH()
+    .send({ 
+      from: address, 
+      value: amount,
+      gasPrice,
+    });
+};
 
 export const approveSubscription = async (tokenAddress:string, exchangeAddress:string) => {
   const superFluid = await getSuperFluid();
@@ -130,6 +172,99 @@ export const startFlow = async (
                     outputTokenAddress,
                     exchangeAddress,
                     0, // INDEX_ID
+                    '0x',
+                  )
+                  .encodeABI(), // callData
+                '0x', // userData
+              ],
+            ),
+          ],
+          [
+            201, // create constant flow (10/mo)
+            superFluid.agreements.cfa.address,
+            web3.eth.abi.encodeParameters(
+              ['bytes', 'bytes'],
+              [
+                superFluid.agreements.cfa.contract.methods
+                  .createFlow(
+                    inputTokenAddress,
+                    exchangeAddress,
+                    amount.toString(),
+                    '0x',
+                  )
+                  .encodeABI(), // callData
+                '0x', // userData
+              ],
+            ),
+          ],
+        ];
+      } else if (outputTokenAddress === SLPxAddress) {
+        call = [
+          [
+            201, // approve the ticket fee
+            superFluid.agreements.ida.address,
+            web3.eth.abi.encodeParameters(
+              ['bytes', 'bytes'],
+              [
+                superFluid.agreements.ida.contract.methods
+                  .approveSubscription(
+                    outputTokenAddress,
+                    exchangeAddress,
+                    0, // INDEX_ID
+                    '0x',
+                  )
+                  .encodeABI(), // callData
+                '0x', // userData
+              ],
+            ),
+          ],
+          [
+            201, // approve the RIC subsidy
+            superFluid.agreements.ida.address,
+            web3.eth.abi.encodeParameters(
+              ['bytes', 'bytes'],
+              [
+                superFluid.agreements.ida.contract.methods
+                  .approveSubscription(
+                    RICAddress,
+                    exchangeAddress,
+                    1, // INDEX_ID
+                    '0x',
+                  )
+                  .encodeABI(), // callData
+                '0x', // userData
+              ],
+            ),
+          ],
+          [
+            201, // approve the SUSHIx rewards subsidy
+            superFluid.agreements.ida.address,
+            web3.eth.abi.encodeParameters(
+              ['bytes', 'bytes'],
+              [
+                superFluid.agreements.ida.contract.methods
+                  .approveSubscription(
+                    SUSHIxAddress,
+                    exchangeAddress,
+                    2, // INDEX_ID
+                    '0x',
+                  )
+                  .encodeABI(), // callData
+                '0x', // userData
+              ],
+            ),
+          ],
+          [
+            201, // approve the MATICx rewards
+            superFluid.agreements.ida.address,
+            web3.eth.abi.encodeParameters(
+              ['bytes', 'bytes'],
+              [
+                superFluid.agreements.ida.contract.methods
+                  .approveSubscription(
+                    MATICxAddress,
+                    exchangeAddress,
+                    3, // INDEX_ID
                     '0x',
                   )
                   .encodeABI(), // callData
