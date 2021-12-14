@@ -9,7 +9,6 @@
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .ts,.tsx --fix",
     "tsc": "tsc --noEmit",
-    "lint": "eslint . --ext .ts,.tsx --fix",
     "fontello": "bash ./fontello.sh",
     "fontello:open": "fontello-cli --config src/assets/fonts/fontello/config.json open"
   },
@@ -86,10 +85,5 @@
       "yarn lint",
       "bash -c tsc"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged && yarn tsc"
-    }
   }
 }
